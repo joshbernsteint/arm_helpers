@@ -1,0 +1,16 @@
+{
+  "repeat":{
+    "prefix": [".rept"],
+    "body": [".rept \t${1:10}","${2:.int}\t${3:10}", ".endr","$0"]
+  },
+  "exit": {
+    "prefix": ["exit", "quit"],
+    "body": ["MOV    X0, 0    /* status <- 0 */","MOV    X8, 93    /* exit() is system call #93 */","SVC    0    /* invoke system call */","$0"],
+    "description": "Calls the exit instructions."
+  },
+  "basic_program": {
+    "prefix": ["basic","beginner"],
+    "body": [".text", ".global _start\n", "_start:    ","    MOV    X0, 0    /* status <- 0 */","    MOV    X8, 93    /* exit() is system call #93 */","    SVC    0    /* invoke system call */","$0"],
+    "description": "The most basic assembly program."
+  }
+  }

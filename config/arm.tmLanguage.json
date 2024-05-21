@@ -1,0 +1,132 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "arm",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#instruction"
+        },
+        {
+            "include": "#registers"
+        },
+        {
+            "include": "#directives"
+        },
+        {
+            "name": "constant.numeric.arm",
+            "match": "(|-)[0-9]+\\b"
+        },
+        {
+            "name": "support.variable.label",
+            "begin": "[^:\\s\\n,=]",
+            "end": ":|\\s|\\n",
+            "patterns": [{
+                "include": "#comment"
+            }]
+        }
+	],
+	"repository": {
+        "comment": {
+            "patterns": [
+                {
+                    "match": "\\/\\/(.*)",
+                    "name": "comment.line.arm"
+                },
+                {
+                    "begin": "\\/\\*",
+                    "end": "\\*\\/",
+                    "name": "comment.block.arm"
+                }
+            ]
+        },
+        "directives": {
+            "patterns": [
+                {
+                    "name": "keyword.control.directive.sections.arm",
+                    "match": "^\\s*\\.(data|iwram|bss|ewram|sbss|text|rodata|global|extern)"
+                },
+                {
+                    "name": "support.class.directive.type.number",
+                    "match": "\\s*\\.(byte|int|hword|word|quad|dword|octa|single|float|double)"
+                },
+                {
+                    "name": "support.class.directive.type.string",
+                    "match": "\\s*\\.(ascii|asciz|string)"
+                },
+                {
+                    "name": "string.regexp.directive.type.align_reserve",
+                    "match": "\\s*\\.(balign|fill|space|skip|rept|endr)"
+                }
+            ]
+        },
+        "instruction":{
+            "patterns": [
+                {
+                    "name": "support.function.load.arm",
+                    "match": "\\b(LDRSH|ldrsh|LDRSB|ldrsb|LDRH|ldrh|LDRB|ldrb|LDR|ldr|SVC|svc)\\b"
+                },
+                {
+                    "name": "support.function.store.arm",
+                    "match": "\\b(STRB|strb|STRH|strh|STR|str)\\b"
+                },
+                {
+                    "name": "support.function.move.arm",
+                    "match": "\\b(FMOV|fmov|MOV|mov|ADR|adr|FCVT|fcvt|SCVTF|scvtf|FCVTZS|fcvtzs)\\b"
+                },
+                {
+                    "name": "support.function.math.arm",
+                    "match": "\\b(ADDS|adds|ADD|add|SUBS|subs|SUB|sub|MUL|mul|SDIV|sdiv|DIV|div|FADD|fadd)\\b"
+                },
+                {
+                    "name": "support.function.binary.arm",
+                    "match": "\\b(ANDS|ands|AND|and|EOR|eor|ORR|orr|ASR|asr|LSL|lsl|LSR|lsr)\\b"
+                },
+                {
+                    "name": "support.function.cond_jump.arm",
+                    "match": "(B|b)\\.(EQ|eq|NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs)\\b"
+                },
+                {
+                    "name": "support.function.jump.arm",
+                    "match": "\\b(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)\\b"
+                }
+            ]
+        },
+        "registers": {
+            "patterns": [
+                {
+                    "name": "constant.language.arm.register.integer",
+                    "match": "(\\[|^|\\s|\\b\\b)(x|X|w|W|r|R)(([1-2][0-9])|(3[0-1])|[0-9])(\\]|\\b\\b)"
+                },
+                {
+                    "name": "constant.language.arm.register.float",
+                    "match": "(\\[|^|\\s|\\b\\b)(h|H|s|S|d|D)(([1-2][0-9])|(3[0-1])|[0-9])(\\]|\\b\\b)"
+                },
+                {
+                    "name": "constant.language.arm.register.named",
+                    "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\]|\\b\\b)"
+                }  
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.tag.arm",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.arm",
+                            "match": "\\\\."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+	"scopeName": "text.assembly.arm"
+}

@@ -1,0 +1,59 @@
+{
+  "name": "arm-assembly-helpers",
+  "displayName": "ARM Assembly Helpers",
+  "description": "Tools to make coding in ARM Assembly easier and more efficient",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [{
+      "command": "arm-assembly-helpers.helloWorld",
+      "title": "Hello World"
+    }],
+    "languages": [
+      {
+        "id": "arm_assemblycs382",
+        "aliases": [
+          "ARMv8",
+          "ARM"
+        ],
+        "extensions": [
+          ".s"
+        ],
+        "configuration": "./config/language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "arm_assemblycs382",
+        "scopeName": "text.assembly.arm",
+        "path": "./config/arm.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "arm_assemblycs382",
+        "path": "./snippets/assembly.json"
+      }
+    ]   
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.89.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}
