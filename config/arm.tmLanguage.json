@@ -23,7 +23,7 @@
         },
         {
             "name": "support.variable.label",
-            "begin": "[^:\\s\\n,=]",
+            "begin": "[^:\\s\\n,=\\.]",
             "end": ":|\\s|\\n",
             "patterns": [{
                 "include": "#comment"
@@ -48,7 +48,7 @@
             "patterns": [
                 {
                     "name": "keyword.control.directive.sections.arm",
-                    "match": "^\\s*\\.(data|iwram|bss|ewram|sbss|text|rodata|global|extern)"
+                    "match": "^\\s*\\.(DATA|data|IWRAM|iwram|BSS|bss|EWRAM|ewram|SBSS|sbss|TEXT|text|RODATA|rodata|GLOBAL|global|EXTERN|extern)"
                 },
                 {
                     "name": "support.class.directive.type.number",
