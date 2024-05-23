@@ -33,4 +33,13 @@ module.exports = [
         insertTextType: "basic2",
         docs: "`LDRB dest, [addr]`: Moves 1 byte from `addr` to the destination register `dest`. It also sign extends the data to match the destination register.",
     },
+    {
+        label: "SVC",
+        desc: "Makes a system call.",
+        insertTextType: "basic1",
+        docs: "`SVC num`: Invokes a system call, switching the program from user mode to kernel mode. Once the system call has completed, the program returns to user mode.",
+        params: [
+            ["num", "Argument for system call, if it is not needed, set to 0."],
+        ]
+    }
 ];

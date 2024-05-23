@@ -9,18 +9,96 @@ module.exports = [
         ],
         //Items that come after a B.
         members: [
-            // NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs
             {
                 label: "EQ",
                 desc: "Branch if Equal.",
                 insertTextType: "basic1",
-                docs: "`B.EQ dest op1 op2`: Adds two numbers `op1` and `op2` and stores the result into `dest`.\n\nOperand 1 must be a register. Operand 2 can either be a register or an immediate number.",
+                docs: "`B.EQ label`: Branches to `label` if the Z flag of the CPSR is set to 1.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
                 params: [
-                    ["dest", "Destination register."],
-                    ["op1", "Source register 1."],
-                    ["op2", "Source register 2 or an immediate number."]
+                    ["label", "Label signifying next instruction after the jump."],
                 ]
-            }
+            },
+            {
+                label: "NE",
+                desc: "Branch if not Equal.",
+                insertTextType: "basic1",
+                docs: "`B.NE label`: Branches to `label` if the Z flag of the CPSR is set to 0.\n\nThe recommended usage is through an earlier call of the `CMP` instruction  to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "LT",
+                desc: "Branch if Less than (Signed).",
+                insertTextType: "basic1",
+                docs: "`B.LT label`: Branches to `label` if the N flag is not equal to the V flag of the CPSR. This is for signed numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "LE",
+                desc: "Branch if Less than or Equal (Signed).",
+                insertTextType: "basic1",
+                docs: "`B.LE label`: Branches to `label` if the Z flag of the CPSR is not 0 **OR** the N flag does not equal the V flag. This is for signed numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "GT",
+                desc: "Branch if Greater Than (Signed).",
+                insertTextType: "basic1",
+                docs: "`B.GT label`: Branches to `label` Z flag of the CPSR is 0 **AND** the N and V flags are equal. This is for signed numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "GE",
+                desc: "Branch if Greather than or Equal (Signed).",
+                insertTextType: "basic1",
+                docs: "`B.GE label`: Branches to `label` if the N flag of the CPSR equals the V flag. This is for signed numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "LO",
+                desc: "Branch if Less than (Unsigned).",
+                insertTextType: "basic1",
+                docs: "`B.LT label`: Branches to `label` if the C flag of the CPSR equals 0. This is for unsigned numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "LS",
+                desc: "Branch if Less than or Equal (Unsigned).",
+                insertTextType: "basic1",
+                docs: "`B.LE label`: Branches to `label` if the Z flag of the CPSR is not 0 **OR** the C flag does not equal 1. This is for unsigned numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "HI",
+                desc: "Branch if Greater Than (Unsigned).",
+                insertTextType: "basic1",
+                docs: "`B.GT label`: Branches to `label` Z flag of the CPSR is 0 **AND** the C flag equals 1. This is for unsigned numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
+            {
+                label: "HS",
+                desc: "Branch if Greather than or Equal (Unsigned).",
+                insertTextType: "basic1",
+                docs: "`B.GE label`: Branches to `label` if the C flag equals 1. This is for unsigned numbers.\n\nThe recommended usage is through an earlier call of the `CMP` instruction to set the CPSR.",
+                params: [
+                    ["label", "Label signifying next instruction after the jump."],
+                ]
+            },
         ]
     },
     {
@@ -65,7 +143,7 @@ module.exports = [
         label: "CMP",
         desc: "Compare two registers and modifies CPSR.",
         insertTextType: "basic2",
-        docs: "`CMP op1, op2`: Compares the two registers and modifies the current program status register (CPSR) accordingly.\n\nAfter this call, you can use the conditional branching instructions `B.[check] [label]` to conditionally branch to a label.",
+        docs: "`CMP op1, op2`: Compares the two registers and modifies the current program status register (CPSR) accordingly.\n\nAfter this call, you can use the conditional branching instructions `B.[check] [label]` to conditionally branch to a label. Specifically, it subtracts `op2` from `op1`, but instead of storing the value, it modifies the CPSR flags.",
         params: [
             ["op1", "First register for comparison."],
             ["op2", "Second register for comparison."],

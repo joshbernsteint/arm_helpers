@@ -12,12 +12,12 @@ const Directives = require('./directives');
  */
 function activate(context) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "arm-assembly-helpers" is now active!');
+	console.log('Running');
 
-
-	context.subscriptions.push(...Operations, ...Directives);
+	context.subscriptions.push(
+		...Operations, 
+		...Directives,
+	);
 
 }
 

@@ -1,6 +1,6 @@
 {
   "repeat":{
-    "prefix": [".rept"],
+    "prefix": ["repeat"],
     "body": [".rept \t${1:10}","${2:.int}\t${3:10}", ".endr","$0"],
     "description": "Repeat data initialization."
   },
