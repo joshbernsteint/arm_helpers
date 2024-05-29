@@ -23,9 +23,14 @@
           "ARM"
         ],
         "extensions": [
-          ".s"
+          ".s",
+          ".s3"
         ],
-        "configuration": "./config/language-configuration.json"
+        "configuration": "./config/language-configuration.json",
+        "icon": {
+          "light": "./config/file_icon.png",
+          "dark": "./config/file_icon.png"
+        }
       }
     ],
     "grammars": [

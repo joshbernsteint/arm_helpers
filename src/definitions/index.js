@@ -1,18 +1,8 @@
 const vscode = require('vscode');
 const constants = require('../constants');
 
-const varList = [];
 
-const labelRegex = /^\s*([^:\s\n,=\.]+:)/gm;
-
-function initializeVars(doc=vscode.window.activeTextEditor.document){
-    const varMatches = 
-    Array.from((doc.getText()).matchAll(labelRegex))
-    .map(e => e[1]);
-    varList.push(...varMatches);
-}
-
-initializeVars(vscode.window.activeTextEditor.document);
+const labelRegex = /^\s*([^:\s\n,=\.]+):/gm;
 
 const definitionProvider = vscode.languages.registerDefinitionProvider(constants.id, {
     provideDefinition(document, position, token){
@@ -33,29 +23,12 @@ const definitionProvider = vscode.languages.registerDefinitionProvider(constants
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
     provideCompletionItems(document, position, token){
-        console.log(varList);
-        const res = varList.map(v => {
-            if(typeof v === "string"){
-                return new vscode.CompletionItem(v, constants.types.Variable);
-            }
-            else return v;
-        });
-        return res;
+        return Array.from((document.getText()).matchAll(labelRegex))
+        .map(e => new vscode.CompletionItem({label: e[1], description: "Memory Label."}, constants.types.Variable));
     }
 })
 
-const varChange = vscode.workspace.onDidChangeTextDocument((event) => {
-    const {contentChanges} = event;
-    if(contentChanges.length > 0){
-        console.log(contentChanges);
-        const newLabelMatches = Array.from(contentChanges[0].text.matchAll(labelRegex))
-        .map(e => e[1]).filter(e => !varList.includes(e));
-        if(newLabelMatches.length > 0){
-            varList.push(...newLabelMatches);
-        }        
-    }
-});
-
 module.exports = [
     definitionProvider,
+    completionProvider
 ];
