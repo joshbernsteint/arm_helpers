@@ -11,27 +11,43 @@ module.exports = [
     },
     {
         label: "LDRB",
-        desc: "Loads 1 byte from memory",
+        desc: "Loads 1 byte from memory.",
         insertTextType: "basic2",
         docs: "`LDRB dest, [addr]`: Moves 1 byte from `addr` to the destination register `dest`.",
+        params: [
+            ["dest", "Destination register."],
+            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+        ]
     },
     {
         label: "LDRH",
-        desc: "Load 4 bytes from memory",
+        desc: "Load 2 bytes from memory.",
         insertTextType: "basic2",
-        docs: "`LDRH dest, [addr]`: Moves 4 bytes from `addr` to the destination register `dest`.",
+        docs: "`LDRH dest, [addr]`: Moves 2 bytes from `addr` to the destination register `dest`.",
+        params: [
+            ["dest", "Destination register."],
+            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+        ]
     },
     {
         label: "LDRSH",
-        desc: "Load 4 bytes from memory (Sign-Extend)",
+        desc: "Load 2 bytes from memory (Sign-Extend).",
         insertTextType: "basic2",
-        docs: "`LDRH dest, [addr]`: Moves 4 bytes from `addr` to the destination register `dest`. It also sign extends the data to match the destination register.",
+        docs: "`LDRH dest, [addr]`: Moves 2 bytes from `addr` to the destination register `dest`. It also sign extends the data to match the destination register.",
+        params: [
+            ["dest", "Destination register."],
+            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+        ]
     },
     {
         label: "LDRSB",
-        desc: "Loads 1 byte from memory (Sign-Extend)",
+        desc: "Loads 1 byte from memory (Sign-Extend).",
         insertTextType: "basic2",
         docs: "`LDRB dest, [addr]`: Moves 1 byte from `addr` to the destination register `dest`. It also sign extends the data to match the destination register.",
+        params: [
+            ["dest", "Destination register."],
+            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+        ]
     },
     {
         label: "SVC",

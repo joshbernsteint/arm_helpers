@@ -68,31 +68,31 @@
             "patterns": [
                 {
                     "name": "support.function.load.arm",
-                    "match": "\\b(LDRSH|ldrsh|LDRSB|ldrsb|LDRH|ldrh|LDRB|ldrb|LDR|ldr|SVC|svc)\\b"
+                    "match": "\\b(LDRSH|ldrsh|LDRSB|ldrsb|LDRH|ldrh|LDRB|ldrb|LDR|ldr|SVC|svc)\\s"
                 },
                 {
                     "name": "support.function.store.arm",
-                    "match": "\\b(STRB|strb|STRH|strh|STR|str)\\b"
+                    "match": "\\b(STRB|strb|STRH|strh|STR|str)\\s"
                 },
                 {
                     "name": "support.function.move.arm",
-                    "match": "\\b(FMOV|fmov|MOV|mov|ADR|adr|FCVT|fcvt|SCVTF|scvtf|FCVTZS|fcvtzs)\\b"
+                    "match": "\\b(FMOV|fmov|MOV|mov|ADR|adr|FCVT|fcvt|SCVTF|scvtf|FCVTZS|fcvtzs)\\s"
                 },
                 {
                     "name": "support.function.math.arm",
-                    "match": "\\b(ADDS|adds|ADD|add|SUBS|subs|SUB|sub|MUL|mul|SDIV|sdiv|DIV|div|FADD|fadd)\\b"
+                    "match": "\\b(ADDS|adds|ADD|add|SUBS|subs|SUB|sub|MUL|mul|SDIV|sdiv|DIV|div|FADD|fadd)\\s"
                 },
                 {
                     "name": "support.function.binary.arm",
-                    "match": "\\b(ANDS|ands|AND|and|EOR|eor|ORR|orr|ASR|asr|LSL|lsl|LSR|lsr)\\b"
+                    "match": "\\b(ANDS|ands|AND|and|EOR|eor|ORR|orr|ASR|asr|LSL|lsl|LSR|lsr)\\s"
                 },
                 {
                     "name": "support.function.cond_jump.arm",
-                    "match": "(B|b)\\.(EQ|eq|NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs)\\b"
+                    "match": "(B|b)\\.(EQ|eq|NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs)\\s"
                 },
                 {
                     "name": "support.function.jump.arm",
-                    "match": "\\b(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)\\b"
+                    "match": "\\b(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)(?!:)\\b"
                 }
             ]
         },

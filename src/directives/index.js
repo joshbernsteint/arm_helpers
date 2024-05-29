@@ -6,7 +6,7 @@ const allItems = constants.format([
     ...require('./Section'), 
 ]);
 
-const completionMap = constants.formatComplete(allItems,constants.types.Property);
+const completionMap = constants.formatComplete(allItems,constants.types.Keyword);
 
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {

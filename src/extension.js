@@ -3,6 +3,7 @@
 const vscode = require('vscode');
 const Operations = require('./operations')
 const Directives = require('./directives');
+const Definitions = require('./definitions');
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -17,6 +18,7 @@ function activate(context) {
 	context.subscriptions.push(
 		...Operations, 
 		...Directives,
+		...Definitions
 	);
 
 }
