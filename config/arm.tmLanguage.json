@@ -21,13 +21,16 @@
             "name": "constant.numeric.arm",
             "match": "(|-)[0-9]+\\b"
         },
+
         {
             "name": "support.variable.label",
-            "begin": "[^:\\s\\n,=\\.]",
+            "begin": "[^:\\s\\n,=\\.\\\\]",
             "end": ":|\\s|\\n",
-            "patterns": [{
-                "include": "#comment"
-            }]
+            "patterns": [
+                {
+                    "include": "#comment"
+                }
+            ]
         }
 	],
 	"repository": {
@@ -61,6 +64,10 @@
                 {
                     "name": "string.regexp.directive.type.align_reserve",
                     "match": "\\s*\\.(balign|fill|space|skip|rept|endr)"
+                },
+                {
+                    "name": "invalid.illegal.directive",
+                    "match": "\\s*\\.(.*)"
                 }
             ]
         },
@@ -128,5 +135,6 @@
             ]
         }
     },
+
 	"scopeName": "text.assembly.arm"
 }

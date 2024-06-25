@@ -49,7 +49,7 @@ const completionMemberProvider = vscode.languages.registerCompletionItemProvider
 
 const hoverProvider = vscode.languages.registerHoverProvider(constants.id, {
     provideHover(document, position, token) {
-        const word = document.getText(document.getWordRangeAtPosition(position,/[^:\n\s-_,\.]+(?!:)/g));
+        const word = document.getText(document.getWordRangeAtPosition(position, constants.wordRegex));
         const lowerWord = word.toUpperCase();
         for (const op of hoverMap) {
             if(word === op.label || lowerWord === op.label){

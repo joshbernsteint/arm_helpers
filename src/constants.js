@@ -41,5 +41,6 @@ module.exports = {
     id: "arm_assemblycs382",
     types: vscode.CompletionItemKind,
     format: formatDocs,
-    formatComplete: makeCompletionItems
+    formatComplete: makeCompletionItems,
+    wordRegex: /[^\n\s\-,\.\/\\:]+/g,
 };
