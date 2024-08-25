@@ -1,0 +1,145 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "arm.docs",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#instruction"
+        },
+        {
+            "include": "#registers"
+        },
+        {
+            "include": "#directives"
+        },
+        {
+            "name": "constant.language.keywords",
+            "match": "\\b(addr|src|num|label)\\b"
+        },
+        {
+            "name": "constant.numeric.arm",
+            "match": "(|-)[0-9]+\\b"
+        },
+        {
+            "name": "support.variable.label",
+            "begin": "[^:\\s\\n,=\\.\\\\]",
+            "end": ":|\\s|\\n",
+            "patterns": [
+                {
+                    "include": "#comment"
+                }
+            ]
+        }
+
+	],
+	"repository": {
+        "comment": {
+            "patterns": [
+                {
+                    "match": "\\/\\/(.*)",
+                    "name": "comment.line.arm"
+                },
+                {
+                    "begin": "\\/\\*",
+                    "end": "\\*\\/",
+                    "name": "comment.block.arm"
+                }
+            ]
+        },
+        "directives": {
+            "patterns": [
+                {
+                    "name": "keyword.control.directive.sections",
+                    "match": "\\s*(DATA|data|IWRAM|iwram|BSS|bss|EWRAM|ewram|SBSS|sbss|TEXT|text|RODATA|rodata|GLOBAL|global|EXTERN|extern)"
+
+                },
+                {
+                    "name": "support.class.directive.type",
+                    "match": "\\s*(Register|Simm9|Imm9|Label|Address|Instruction|FRegister|Directive)"
+                },
+                {
+                    "name": "support.class.directive.type.string",
+                    "match": "\\s*\\.(ascii|asciz|string)"
+                },
+                {
+                    "name": "string.regexp.directive.type.align_reserve",
+                    "match": "\\s*\\.(balign|fill|space|skip|rept|endr)"
+                },
+                {
+                    "name": "invalid.illegal.directive",
+                    "match": "\\s*\\.(.*)"
+                }
+            ]
+        },
+        "instruction":{
+            "patterns": [
+                {
+                    "name": "support.function.load.arm",
+                    "match": "\\b(LDRSH|ldrsh|LDRSB|ldrsb|LDRH|ldrh|LDRB|ldrb|LDR|ldr|SVC|svc)\\s"
+                },
+                {
+                    "name": "support.function.store.arm",
+                    "match": "\\b(STRB|strb|STRH|strh|STR|str)\\s"
+                },
+                {
+                    "name": "support.function.move.arm",
+                    "match": "\\b(FMOV|fmov|MOV|mov|ADR|adr|FCVT|fcvt|SCVTF|scvtf|FCVTZS|fcvtzs)\\s"
+                },
+                {
+                    "name": "support.function.math.arm",
+                    "match": "\\b(ADDS|adds|ADD|add|SUBS|subs|SUB|sub|MUL|mul|SDIV|sdiv|DIV|div|FADD|fadd)\\s"
+                },
+                {
+                    "name": "support.function.binary.arm",
+                    "match": "\\b(ANDS|ands|AND|and|EOR|eor|ORR|orr|ASR|asr|LSL|lsl|LSR|lsr)\\s"
+                },
+                {
+                    "name": "support.function.cond_jump.arm",
+                    "match": "(B|b)\\.(EQ|eq|NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs)\\s"
+                },
+                {
+                    "name": "support.function.jump.arm",
+                    "match": "\\b(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)(?!:)\\b"
+                }
+            ]
+        },
+        "registers": {
+            "patterns": [
+                {
+                    "name": "constant.language.arm.register.integer",
+                    "match": "(\\[|^|\\s|\\b\\b)(x|X|w|W|r|R)([a-zA-Z]|dest|src)(\\]|\\b\\b)"
+                },
+                {
+                    "name": "constant.language.arm.register.float",
+                    "match": "(\\[|^|\\s|\\b\\b)(h|H|s|S|d|D)([a-zA-Z]|dest|src)(\\]|\\b\\b)"
+                },
+                {
+                    "name": "constant.language.arm.register.named",
+                    "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\]|\\b\\b)"
+                }  
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.tag.arm",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.arm",
+                            "match": "\\\\."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+
+	"scopeName": "text.assembly.arm.docs"
+}

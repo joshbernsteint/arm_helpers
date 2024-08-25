@@ -1,5 +1,5 @@
 {
-  "name": "arm-assembly-helpers",
+  "name": "ARMv8 Extension",
   "displayName": "ARM Assembly Helpers",
   "description": "Tools to make coding in ARM Assembly easier and more efficient",
   "version": "0.0.1",
@@ -17,7 +17,7 @@
     }],
     "languages": [
       {
-        "id": "arm_assemblycs382",
+        "id": "armv8",
         "aliases": [
           "ARMv8",
           "ARM"
@@ -31,21 +31,30 @@
           "light": "./config/file_icon.png",
           "dark": "./config/file_icon.png"
         }
+      },
+      {
+        "id": "armv8_docs",
+        "configuration": "./config/language-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "arm_assemblycs382",
+        "language": "armv8",
         "scopeName": "text.assembly.arm",
         "path": "./config/arm.tmLanguage.json"
+      },
+      {
+        "language": "armv8_docs",
+        "scopeName": "text.assembly.arm.docs",
+        "path": "./config/arm.docs.tmLanguage.json"
       }
     ],
     "snippets": [
       {
-        "language": "arm_assemblycs382",
+        "language": "armv8",
         "path": "./snippets/assembly.json"
       }
-    ]   
+    ]
   },
   "scripts": {
     "lint": "eslint .",

@@ -13,7 +13,7 @@ const Definitions = require('./definitions');
  */
 function activate(context) {
 
-	console.log('Running');
+	console.log('|---Running---|');
 
 	context.subscriptions.push(
 		...Operations, 
