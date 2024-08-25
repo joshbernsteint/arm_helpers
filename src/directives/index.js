@@ -1,12 +1,16 @@
 const vscode = require('vscode');
 const constants = require('../constants');
+const {formatComplete, formatDocs} = require('../utils/format');
 
 
-const allItems = constants.format([
+
+
+const allItems = formatDocs([
     ...require('./Section'), 
-]);
+], undefined, "Directive");
 
-const completionMap = constants.formatComplete(allItems,constants.types.Keyword);
+const completionMap = formatComplete(allItems,constants.CompletionTypes.Keyword);
+
 
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
@@ -19,10 +23,11 @@ const completionProvider = vscode.languages.registerCompletionItemProvider(const
 
 const hoverProvider = vscode.languages.registerHoverProvider(constants.id, {
     provideHover(document, position, token) {
-        const {text} = document.lineAt(position);
+        const text = document.getText(document.getWordRangeAtPosition(position));
+        
         const lowerWord = text.toLowerCase();
         for (const op of allItems) {
-            if(lowerWord === "." + op.label){
+            if(lowerWord === op.label){
                 return new vscode.Hover(op.docs); 
             }
         }

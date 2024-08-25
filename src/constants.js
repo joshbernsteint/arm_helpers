@@ -1,46 +1,28 @@
 const vscode = require('vscode');
 
-const insertTextMap = {
+const insertTextMap = Object.freeze({
     none: "",
     section: "\n\t",
     basic1: " \t${1}",
     basic2: " \t${1}, ${2}",
     basic3: " \t${1}, ${2}, ${3}",
-};
+});
 
+const Types = Object.freeze({
+    ADDS: "Address", //Address 
+    SIM9: "Simm9", //Signed 9-bit Immediate Number
+    REG: "Register", //Register
+    LBL: "Label", //Memory label,
+    FREG: "FRegister" //Floating point Register
+});
 
-/**
- * Formats the docs to include the parameters
- * @param {*} items List of completion items.
- * @returns List with the docs and snippets formatted properly.
- */
-function formatDocs(items=[{label: "", insertText: "", desc: "", docs: "", params: undefined}]){
-    const result = [];
-    for (const item of items) {
-        if(item.params){
-            item.docs = item.docs + "\n\n" + item.params.map((([name,desc]) => `@param \`${name}\` &mdash; ${desc}`)).join('\n\n');
-        }
-        const newInsertText = (item.insertTextType === "custom") ? item.insertText : insertTextMap[item.insertTextType];
-        item.insertText = new vscode.SnippetString(item.label + newInsertText);
-        item.docs = new vscode.MarkdownString(item.docs);
-        result.push(item);
-    }
-    return result;
-}
-
-function makeCompletionItems(items, type=vscode.CompletionItemKind.Function){
-    return items.map(item => {
-        const t = new vscode.CompletionItem({label: item.label, description: item.desc}, type);
-        t.insertText = item.insertText;
-        t.documentation = item.docs;
-        return t;
-    });
-}
 
 module.exports = {
-    id: "arm_assemblycs382",
-    types: vscode.CompletionItemKind,
-    format: formatDocs,
-    formatComplete: makeCompletionItems,
+    docsId: "armv8_docs",
+    id: "armv8",
+    CompletionTypes: vscode.CompletionItemKind,
     wordRegex: /[^\n\s\-,\.\/\\:]+/g,
+    memberRegex: /[^\n\s\-,\/\\:]+/g,
+    Types,
+    insertTextMap,
 };

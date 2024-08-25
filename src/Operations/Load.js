@@ -1,61 +1,110 @@
+const { Types } = require('../constants');
+
+const addrString = `${Types.ADDS}( ${Types.REG} | [ ${Types.REG}, ${Types.SIM9} ] )`;
+
+
 module.exports = [
     {
         label: "LDR",
         desc: "Load 4/8 bytes from memory",
         insertTextType: "basic2",
-        docs: "`LDR dest, [addr]`: Moves 4/8 bytes from `addr` to the destination register `dest`. \n\nAmount moved depends on the register type of destination. 4 bytes if it is a W register, and 8 bytes with an X register.",
+        docs: "Moves 4/8 bytes from `addr` to the destination register `Rdest`. \n\nAmount moved depends on the register type of destination. 4 bytes if it is a W register, and 8 bytes with an X register.",
         params: [
-            ["dest", "Destination register."],
-            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+            {
+                name: "Rdest",
+                type: Types.REG,
+                desc: "Destination register.",
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."
+            }
         ]
     },
     {
         label: "LDRB",
         desc: "Loads 1 byte from memory.",
         insertTextType: "basic2",
-        docs: "`LDRB dest, [addr]`: Moves 1 byte from `addr` to the destination register `dest`.",
+        docs: "Moves 1 byte from `addr` to the destination register `Rdest`.",
         params: [
-            ["dest", "Destination register."],
-            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+            {
+                name: "Rdest",
+                type: Types.REG,
+                desc: "Destination register.",
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."
+            }
         ]
     },
     {
         label: "LDRH",
         desc: "Load 2 bytes from memory.",
         insertTextType: "basic2",
-        docs: "`LDRH dest, [addr]`: Moves 2 bytes from `addr` to the destination register `dest`.",
+        docs: "Moves 2 bytes from `addr` to the destination register `Rdest`.",
         params: [
-            ["dest", "Destination register."],
-            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+            {
+                name: "Rdest",
+                type: Types.REG,
+                desc: "Destination register.",
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."
+            }        
         ]
     },
     {
         label: "LDRSH",
         desc: "Load 2 bytes from memory (Sign-Extend).",
         insertTextType: "basic2",
-        docs: "`LDRH dest, [addr]`: Moves 2 bytes from `addr` to the destination register `dest`. It also sign extends the data to match the destination register.",
+        docs: "Moves 2 bytes from `addr` to the destination register `Rdest`. It also sign extends the data to match the destination register.",
         params: [
-            ["dest", "Destination register."],
-            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+            {
+                name: "Rdest",
+                type: Types.REG,
+                desc: "Destination register.",
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."
+            }
         ]
     },
     {
         label: "LDRSB",
         desc: "Loads 1 byte from memory (Sign-Extend).",
         insertTextType: "basic2",
-        docs: "`LDRB dest, [addr]`: Moves 1 byte from `addr` to the destination register `dest`. It also sign extends the data to match the destination register.",
+        docs: "Moves 1 byte from `addr` to the destination register `Rdest`. It also sign extends the data to match the destination register.",
         params: [
-            ["dest", "Destination register."],
-            ["addr", "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."]
+            {
+                name: "Rdest",
+                type: Types.REG,
+                desc: "Destination register.",
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by an immediate number or another register."
+            }        
         ]
     },
     {
         label: "SVC",
         desc: "Makes a system call.",
         insertTextType: "basic1",
-        docs: "`SVC num`: Invokes a system call, switching the program from user mode to kernel mode. Once the system call has completed, the program returns to user mode.",
+        docs: "Invokes a system call, switching the program from user mode to kernel mode. Once the system call has completed, the program returns to user mode.",
         params: [
-            ["num", "Argument for system call, if it is not needed, set to 0."],
+            {
+                name: "num",
+                type: Types.SIM9,
+                desc: "Argument for system call, if it is not needed, set to 0."
+            }
         ]
     }
 ];

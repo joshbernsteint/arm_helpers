@@ -14,4 +14,4 @@
     "body": [".text", "\t.global _start\n", "\t_start:    ","\t\tMOV    X0, 0    /* status <- 0 */","\t\tMOV    X8, 93    /* exit() is system call #93 */","\t\tSVC    0    /* invoke system call */","$0"],
     "description": "The most basic assembly program."
   }
-  }
+}

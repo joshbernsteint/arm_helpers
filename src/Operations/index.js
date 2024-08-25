@@ -1,22 +1,23 @@
 const vscode = require('vscode');
 const constants = require('../constants');
+const {formatDocs, formatComplete} = require('../utils/format');
 
 
-const allItems = constants.format([
+const allItems = formatDocs([
+    ...require('./Jump'),
     ...require('./Load'), 
     ...require('./Store'),
     ...require('./Move'),
     ...require('./Math'),
-    ...require('./Jump'),
     ...require('./Binary'),
 ]);
 
-const completionMap = constants.formatComplete(allItems);
+const completionMap = formatComplete(allItems);
 
 const completionMemberMap = [];
 allItems.forEach(e => {
     if(e.members){
-        completionMemberMap.push([e.label + ".", constants.formatComplete(constants.format(e.members))]);
+        completionMemberMap.push([e.label + ".", formatComplete(formatDocs(e.members, e.label+"."))]);
     }
 });
 

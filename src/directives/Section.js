@@ -9,7 +9,8 @@ module.exports = [
         label: "data",
         desc: "Initialized data segment.",
         insertTextType: "section",
-        docs: "Describes the global variables that are initialized to certain values at the start of the program.\n\n Variables should be declared with a label, type directive, and a value. 'Macro' directives suck as `.skip`, `.balign`, and others can be used in this section as well.\n\n### Example\n`example:\t.quad\t472` creates a variable that can be referenced with the label 'example', that is 8 bytes in memory and with an inital value of 472.",
+        docs: "Describes the global variables that are initialized to certain values at the start of the program.<br><br> Variables should be declared with a label, type directive, and a value. 'Macro' directives suck as `.skip`, `.balign`, and others can be used in this section as well.<br><br><h3>Example</h3>`example:\t.quad\t472` creates a variable that can be referenced with the label 'example', that is 8 bytes in memory and with an inital value of 472.",
+        
     },
     {
         label: "bss",
