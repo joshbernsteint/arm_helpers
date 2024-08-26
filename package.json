@@ -56,7 +56,17 @@
         "language": "armv8",
         "path": "./snippets/assembly.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "ARMv8",
+      "properties": {
+        "arm.insertSpaceSize":{
+          "type": "number",
+          "default": 4,
+          "description": "How many spaces to insert after an auto complete item."
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",

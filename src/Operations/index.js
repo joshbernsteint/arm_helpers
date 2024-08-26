@@ -1,31 +1,35 @@
 const vscode = require('vscode');
 const constants = require('../constants');
 const {formatDocs, formatComplete} = require('../utils/format');
+const settings = require('../utils/SettingsManger');
 
-
-const allItems = formatDocs([
+const definitions = [
     ...require('./Jump'),
     ...require('./Load'), 
     ...require('./Store'),
     ...require('./Move'),
     ...require('./Math'),
     ...require('./Binary'),
-]);
+];
 
-const completionMap = formatComplete(allItems);
+const generateMaps = () => {
+    const all = formatDocs(definitions);
+    const compMap = formatComplete(all);
+    const memMap = [];
+    const hovMap = [];
+    all.forEach(e => {
+        if(e.members){
+            memMap.push([e.label + ".", formatComplete(formatDocs(e.members, e.label+"."))]);
+            hovMap.push(e, ...e.members.map(l => ({...l, label: `${e.label}.${l.label}`})));
+        }
+        else hovMap.push(e);
+    });
+    return [all, compMap, memMap, hovMap];
+}
 
-const completionMemberMap = [];
-allItems.forEach(e => {
-    if(e.members){
-        completionMemberMap.push([e.label + ".", formatComplete(formatDocs(e.members, e.label+"."))]);
-    }
-});
-
-const hoverMap = allItems.flatMap(e => {
-    if(e.members){
-        return [e,...e.members.map(l => ({...l, label: `${e.label}.${l.label}`}))];
-    }
-    else return e;
+let [allItems, completionMap, completionMemberMap, hoverMap] = generateMaps();
+settings.registerSettingChangeHandler(settings.spaceCommandName, () => {
+    [allItems, completionMap, completionMemberMap, hoverMap] = generateMaps();
 });
 
 

@@ -2,6 +2,7 @@ const vscode = require('vscode');
 const HoverString = require('./HoverString');
 const constants = require('../constants');
 const {matchEvery} = require('./stringUtils');
+const settings = require('./SettingsManger');
 
 /**
  * Formats the docs to include the parameters
@@ -10,8 +11,9 @@ const {matchEvery} = require('./stringUtils');
  */
 function formatDocs(items=[{label: "", insertText: "", desc: "", docs: "", params: undefined}], prefix="", type="Instruction"){
     const result = [];
+    const textMap = constants.getTextMap(settings.spaceString);
     for (const item of items) {
-        const newInsertText = (item.insertTextType === "custom") ? item.insertText : constants.insertTextMap[item.insertTextType];
+        const newInsertText = (item.insertTextType === "custom") ? item.insertText : textMap[item.insertTextType];
         item.insertText = new vscode.SnippetString(item.label + newInsertText);
         item.docs = formatFunctionDocs(prefix+item.label, item, type);
         result.push(item);

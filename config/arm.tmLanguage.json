@@ -64,7 +64,7 @@
                 },
                 {
                     "name": "support.class.directive.type.number",
-                    "match": "\\s*\\.(byte|int|hword|word|quad|dword|octa|single|float|double)"
+                    "match": "\\s*\\.(byte|int|hword|word|quad|dword|octa|single|float|double|(1|2|4|8)byte|dc\\.(b|w|l|a|d|s)|dc|short|value|long|xword)"
                 },
                 {
                     "name": "support.class.directive.type.string",

@@ -1,13 +1,18 @@
 const vscode = require('vscode');
+const settings = require('./utils/SettingsManger');
 
-const insertTextMap = Object.freeze({
-    none: "",
-    section: "\n\t",
-    space: " ",
-    basic1: " \t${1}",
-    basic2: " \t${1}, ${2}",
-    basic3: " \t${1}, ${2}, ${3}",
-});
+function generateTextMap(spaces){
+    return {
+        none: "",
+        section: `\n${spaces}`,
+        space: " ",
+        basic1: ` ${spaces}$\{1\}`,
+        basic2: ` ${spaces}$\{1\} $\{2\}`,
+        basic3: ` ${spaces}$\{1\} $\{2\} $\{3\}`,
+    }
+}
+
+const insertTextMap = generateTextMap(settings.spaceString);
 
 const Types = Object.freeze({
     ADDS: "Address", //Address 
@@ -26,4 +31,14 @@ module.exports = {
     memberRegex: /[^\n\s\-,\/\\:]+/g,
     Types,
     insertTextMap,
+    getTextMap: (spaces) => {
+        return {
+            none: "",
+            section: `\n${spaces}`,
+            space: " ",
+            basic1: ` ${spaces}$\{1\}`,
+            basic2: ` ${spaces}$\{1\} $\{2\}`,
+            basic3: ` ${spaces}$\{1\} $\{2\} $\{3\}`,
+        }
+    }
 };
