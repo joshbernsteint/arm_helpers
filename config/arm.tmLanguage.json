@@ -21,8 +21,7 @@
             "include": "#directives"
         },
         {
-            "name": "constant.numeric.arm",
-            "match": "(|-)[0-9]+\\b"
+            "include": "#numbers"
         },
 
         {
@@ -109,6 +108,18 @@
                 {
                     "name": "support.function.jump.arm",
                     "match": "\\b(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)(?!:)\\b"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.arm",
+                    "match": "(|-)[0-9]+\\b"
+                },
+                {
+                    "name": "constant.numeric.arm.hex",
+                    "match": "0x[0-9a-fA-F]+\\b"
                 }
             ]
         },

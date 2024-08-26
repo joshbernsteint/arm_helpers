@@ -20,7 +20,6 @@ const definitionProvider = vscode.languages.registerDefinitionProvider(constants
                 return new vscode.Location(document.uri, new vscode.Range(new vscode.Position(i, defIndex), new vscode.Position(i, defIndex + word.length+1)))
             }
         }
-
         return undefined;
     }
 });
