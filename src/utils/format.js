@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const HoverString = require('./HoverString');
 const constants = require('../constants');
+const {matchEvery} = require('./stringUtils');
 
 /**
  * Formats the docs to include the parameters
@@ -12,23 +13,92 @@ function formatDocs(items=[{label: "", insertText: "", desc: "", docs: "", param
     for (const item of items) {
         const newInsertText = (item.insertTextType === "custom") ? item.insertText : constants.insertTextMap[item.insertTextType];
         item.insertText = new vscode.SnippetString(item.label + newInsertText);
-        item.docs = formatFunctionDocs(prefix+item.label, item.docs, item.params, type);
+        item.docs = formatFunctionDocs(prefix+item.label, item, type);
         result.push(item);
     }
     return result;
 }
 
 
+const docStringRegexes = Object.freeze({
+    param: /@param\s*(.*)/g,
+    return:/@return(?:s|)\s*(.*)/g,
+    modifies: /@modifies\s*(.*)/g,
+    restores: /@restores\s*(.*)/g,
+    example: /@example([\s\S]+?)(?=(?:\*\/|@param|@return(?:s|)|@example|@modifies|@restores))/gm,
+    desc: /^([\s\S]*?)(?:@(?:param|return(?:s|)|example|restores|modifies))/g,
+});
+
+
 /**
- * 
+ * @param {string} str asdasd
+ * @example parseDocString("Hello")
+ * @returns parsed docstring
+ */
+function parseDocString(str){
+    const construct = [];
+
+    // Get generic description
+    const foundDesc = matchEvery(str, docStringRegexes.desc);
+    if(foundDesc.length > 0){
+        construct.push(`${foundDesc[0][1].trim()}   `);
+    }
+
+    const foundParams = matchEvery(str, docStringRegexes.param);
+    if(foundParams.length > 0){
+        foundParams.forEach(([_, desc],i ) => {
+            construct.push(`<p><em>@param</em> \`R${i}\` &mdash; ${desc}</p>`)
+        });
+    }    
+
+    const foundReturn = matchEvery(str, docStringRegexes.return);
+    if(foundReturn.length > 0){
+        foundReturn.forEach(([_, desc],i ) => {
+            construct.push(`<p><em>@returns</em> \`R${i}\` &mdash; ${desc}</p>`)
+        });
+    }
+
+    const foundModifies = matchEvery(str, docStringRegexes.modifies);
+    if(foundModifies.length > 0){
+        // else construct.push('<hr>');
+        construct.push('<p><em>@modifies</em></p>\n')
+        construct.push({content: foundModifies[0][1], language: constants.id})
+    }
+
+    const foundRestores = matchEvery(str, docStringRegexes.restores);
+    if(foundRestores.length > 0){
+        // else construct.push('<hr>');
+        construct.push('<p><em>@restores</em></p>\n')
+        construct.push({content: foundRestores[0][1], language: constants.id})
+    }
+
+    const foundExamples = matchEvery(str + "*/", docStringRegexes.example);
+    if(foundExamples.length > 0){
+        // else construct.push('<hr>');
+        foundExamples.forEach(([_, desc], i) => {
+            construct.push({
+                before: '<p><em>@example</em></p>\n', 
+                content: desc.trim(),
+            });
+        });
+    }
+    
+    return (construct.length === 0) ? str : construct;
+}
+
+
+
+/**
+ * asdasd
  * @param {*} funcName 
- * @param {*} docs 
- * @param {*} params 
+ * @param {*} detailObj 
+ * @param {*} wordType
  * @returns 
  */
-function formatFunctionDocs(funcName, docs, params, wordType="Instruction"){
+function formatFunctionDocs(funcName, detailObj={docs:"", params:[], extra: undefined}, wordType="Instruction"){
     // <span style=\"color:var(--vscode-keyword-control);\">TESTING</span>
     let titleString = `${wordType} ${funcName}`;
+    const {docs, params, extra} = detailObj;
     const bodyList = [docs+"<br>"];
     if(params && params.length > 0){
         params.forEach(({name, type, desc},i) => {
@@ -38,11 +108,11 @@ function formatFunctionDocs(funcName, docs, params, wordType="Instruction"){
             bodyList.push(`<em>@param</em> \`${name}\` &mdash; ${desc}`)
         });
     }
-    const result = new HoverString(titleString, bodyList.join('<br>'));
-    // if(params.example){
-    //     result.appendMarkdown('<h3>Example</h3>').appendCodeblock(params.example, constants.docsId);
-    // }
+    if(extra){
 
+    }
+
+    const result = new HoverString(titleString, bodyList.join('<br>'));
     return result;
 
 }
@@ -60,5 +130,6 @@ function formatComplete(items, type=vscode.CompletionItemKind.Function){
 
 module.exports = {
     formatDocs,
-    formatComplete
+    formatComplete,
+    parseDocString,
 };

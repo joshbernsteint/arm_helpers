@@ -133,7 +133,7 @@
                     "patterns": [
                         {
                             "name": "constant.character.escape.arm",
-                            "match": "\\\\."
+                            "match": "\\\\(U[a-fA-F0-9]{8}|u[a-fA-F0-9]{4}|x[a-fA-F0-9]{2,8}|[0-7]{3}|[\\S])"
                         }
                     ]
                 }

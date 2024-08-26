@@ -22,7 +22,7 @@ module.exports = [
                 type: `${Types.REG} | ${Types.SIM9}`,
                 desc: "Source register 2 or an immediate number.",
             },
-        ]
+        ],
     },
     {
         label: "AND",

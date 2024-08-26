@@ -51,7 +51,7 @@ module.exports = [
             {
                 name: "addr",
                 type: `${Types.ADDS}( ${Types.LBL} | ${Types.SIM9} )`,
-                desc: "Where to find the address, this can either be an immediate number or a labe;."
+                desc: "Where to find the address, this can either be an immediate number or a label."
             }
         ]
     },

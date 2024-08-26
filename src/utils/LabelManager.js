@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const { parseDocString } = require('./format');
 
 const COMMENT_REGEXES = Object.freeze({
     docstringRegex: /\/\*([\S\s]+?(?=\*\/))\*\//gm,
@@ -6,9 +7,12 @@ const COMMENT_REGEXES = Object.freeze({
     labelWithCommentRegex: /^\s*([^:\s\n,=\.]+):([^\/\n]*)((\/\/(.*))|(\/\*([\s\S]*?)\*\/))/gm,
 });
 
+const DEFAULT_CONFIG = {
+    maxFiles: -1,
+};
 
 class LabelManager{
-    constructor(currentEditor=undefined){
+    constructor(currentEditor=undefined, config=DEFAULT_CONFIG){
         this.labels = {};
         this.versionMap = {};
         this.activeDocument = currentEditor ? currentEditor.document : undefined;
@@ -76,7 +80,7 @@ class LabelManager{
                     
                     const match = Array.from(docString.matchAll(this.regexes.docstringRegex))[0];
                     newLabel = {
-                        content: match[1].trim(),
+                        content: parseDocString(match[1].trim()),
                         range: docRange,
                         labelType: "doc"
                     };
@@ -85,7 +89,7 @@ class LabelManager{
             }
         }
         if(!foundDocs){
-            const match = Array.from(this.activeDocument.lineAt(startLine).text.matchAll(this.regexes.labelWithCommentRegex))[0];
+            const match = Array.from(this.activeDocument.lineAt(startLine).text.matchAll(this.regexes.labelWithCommentRegex));
             
             if(match && match.length > 0){
                 newLabel = {
@@ -96,7 +100,7 @@ class LabelManager{
             }
         }
         
-        this.labels[this.activeFile][lbl] = newLabel;
+        this.labels[this.activeFile][lbl] = newLabel;        
         return newLabel;
     }
 
@@ -117,7 +121,10 @@ class LabelManager{
         }
     }
 
-    getActiveLabels(){
+    getActiveLabels(getLatest=false){
+        if(getLatest){
+            this.initializeLabels();
+        }
         return this.labels[this.activeFile];
     }
 
@@ -134,14 +141,7 @@ class LabelManager{
             let textContent, match;
             switch (res.labelType) {
                 case 'doc':
-                    match = Array.from(this.activeDocument.getText(res.range).matchAll(this.regexes.docstringRegex))[0];
-                    if(match && match.length > 0){                        
-                        textContent = match[1].trim();
-                        if(textContent !== res.content)
-                            this.labels[this.activeFile][labelName].content = textContent;
-                    }
-                    else 
-                        this.findLabel(labelName);
+                    this.findLabel(labelName);
                     break;
                 case 'sAbove':
                     

@@ -23,7 +23,7 @@ allItems.forEach(e => {
 
 const hoverMap = allItems.flatMap(e => {
     if(e.members){
-        return [e,...e.members];
+        return [e,...e.members.map(l => ({...l, label: `${e.label}.${l.label}`}))];
     }
     else return e;
 });
@@ -46,14 +46,14 @@ const completionMemberProvider = vscode.languages.registerCompletionItemProvider
         }
         return undefined;
     }
-},'.');
+}, '.');
 
 const hoverProvider = vscode.languages.registerHoverProvider(constants.id, {
     provideHover(document, position, token) {
         const word = document.getText(document.getWordRangeAtPosition(position, constants.wordRegex));
-        const lowerWord = word.toUpperCase();
+        const upperWord = word.toUpperCase();
         for (const op of hoverMap) {
-            if(word === op.label || lowerWord === op.label){
+            if(upperWord === op.label){
                 return new vscode.Hover(op.docs); 
             }
         }

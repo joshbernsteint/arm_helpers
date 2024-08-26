@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const {docsId} = require('../constants');
+const {docsId, id} = require('../constants');
 
 class HoverString extends vscode.MarkdownString{
     constructor(title, body=""){
@@ -7,7 +7,21 @@ class HoverString extends vscode.MarkdownString{
         this.supportHtml = true;
         this.isTrusted = true;
         this.appendCodeblock(title, docsId);
-        this.appendMarkdown(body);
+        if(!Array.isArray(body)){
+            this.appendMarkdown(body);
+        }
+        else{
+            //Parse docstring
+            body.forEach(e => {
+                if(typeof e === "string"){
+                    this.appendMarkdown(e);
+                }
+                else{
+                    if(e.before) this.appendMarkdown(e.before);
+                    this.appendCodeblock(e.content, e.language || id);
+                }
+            })
+        }
     }
 }
 

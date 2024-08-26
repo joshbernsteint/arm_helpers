@@ -2,6 +2,9 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "arm",
 	"patterns": [
+        {
+            "include": "#parens"
+        },
 		{
 			"include": "#comment"
 		},
@@ -43,7 +46,13 @@
                 {
                     "begin": "\\/\\*",
                     "end": "\\*\\/",
-                    "name": "comment.block.arm"
+                    "name": "comment.block.arm",
+                    "patterns": [
+                        {
+                            "match": "@(param|example|returns|modifies|desc|restores)",
+                            "name": "constant.language.docs"
+                        }
+                    ]
                 }
             ]
         },
@@ -103,6 +112,10 @@
                 }
             ]
         },
+        "parens": {
+            "name": "meta.embedded.parens",
+            "match": "(\\(|\\)|\\[|\\])"
+        },
         "registers": {
             "patterns": [
                 {
@@ -115,7 +128,7 @@
                 },
                 {
                     "name": "constant.language.arm.register.named",
-                    "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\]|\\b\\b)"
+                    "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\b\\b)"
                 }  
             ]
         },
@@ -128,7 +141,7 @@
                     "patterns": [
                         {
                             "name": "constant.character.escape.arm",
-                            "match": "\\\\."
+                            "match": "\\\\(U[a-fA-F0-9]{8}|u[a-fA-F0-9]{4}|x[a-fA-F0-9]{2,8}|[0-7]{3}|[\\S])"
                         }
                     ]
                 }

@@ -17,5 +17,17 @@ module.exports = [
         desc: "Uninitialized data segment.",
         insertTextType: "section",
         docs: "",
+    },
+    {
+        label: "global",
+        desc: "Defines a global symbol.",
+        insertTextType: "space",
+        docs: "Tells the assembler that symbol is to be made globally visible to other source files and to the linker.",
+    },
+    {
+        label: "extern",
+        desc: "Defines an external symbol.",
+        insertTextType: "space",
+        docs: "Indicates that symbol is defined in another source code file.",
     }
 ]

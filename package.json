@@ -2,11 +2,13 @@
   "name": "ARMv8 Extension",
   "displayName": "ARM Assembly Helpers",
   "description": "Tools to make coding in ARM Assembly easier and more efficient",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "publisher": "Joshua Bernstein",
   "engines": {
     "vscode": "^1.89.0"
   },
   "categories": [
+    "Programming Languages",
     "Other"
   ],
   "main": "./src/extension.js",

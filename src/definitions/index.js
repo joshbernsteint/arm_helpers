@@ -27,9 +27,12 @@ const definitionProvider = vscode.languages.registerDefinitionProvider(constants
 
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
-    provideCompletionItems(document, position, _token){
-        return Object.entries(manager.getActiveLabels())
-        .map(e => new vscode.CompletionItem({label: e[0], description: `${e[1]} (Jump Label)`}, constants.CompletionTypes.Constant));
+    provideCompletionItems(document, position, _token){        
+        return Object.entries(manager.getActiveLabels(true))
+        .map(([lbl, desc]) => {
+            desc = Array.isArray(desc.content) ? desc.content[0] : desc.content;
+            return new vscode.CompletionItem({label: lbl, description: `${desc} (Jump Label)`}, constants.CompletionTypes.Constant)
+        });
     }
 });
 

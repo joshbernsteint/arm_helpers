@@ -3,6 +3,7 @@ const vscode = require('vscode');
 const insertTextMap = Object.freeze({
     none: "",
     section: "\n\t",
+    space: " ",
     basic1: " \t${1}",
     basic2: " \t${1}, ${2}",
     basic3: " \t${1}, ${2}, ${3}",
@@ -21,7 +22,7 @@ module.exports = {
     docsId: "armv8_docs",
     id: "armv8",
     CompletionTypes: vscode.CompletionItemKind,
-    wordRegex: /[^\n\s\-,\.\/\\:]+/g,
+    wordRegex: /[^\n\s\-,\/\\:]+/g,
     memberRegex: /[^\n\s\-,\/\\:]+/g,
     Types,
     insertTextMap,
