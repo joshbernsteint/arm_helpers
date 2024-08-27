@@ -2,7 +2,7 @@
   "name": "armextensionhelpers",
   "displayName": "ARM Assembly Helpers",
   "description": "Tools to make coding in ARM Assembly easier and more efficient",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "JoshuaBernstein",
   "icon": "./config/file_icon",
   "engines": {
@@ -14,10 +14,12 @@
   ],
   "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "arm-assembly-helpers.helloWorld",
-      "title": "Hello World"
-    }],
+    "commands": [
+      {
+        "command": "arm-assembly-helpers.helloWorld",
+        "title": "Hello World"
+      }
+    ],
     "languages": [
       {
         "id": "armv8",
@@ -61,7 +63,7 @@
     "configuration": {
       "title": "ARMv8",
       "properties": {
-        "arm.insertSpaceSize":{
+        "arm.insertSpaceSize": {
           "type": "number",
           "default": 4,
           "description": "How many spaces to insert after an auto complete item."
