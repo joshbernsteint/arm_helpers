@@ -4,7 +4,7 @@
   "description": "Tools to make coding in ARM Assembly easier and more efficient",
   "version": "1.1.0",
   "publisher": "JoshuaBernstein",
-  "icon": "./config/file_icon",
+  "icon": "./config/file_icon.png",
   "engines": {
     "vscode": "^1.89.0"
   },
