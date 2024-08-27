@@ -14,12 +14,6 @@
   ],
   "main": "./src/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "arm-assembly-helpers.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "languages": [
       {
         "id": "armv8",
@@ -28,8 +22,7 @@
           "ARM"
         ],
         "extensions": [
-          ".s",
-          ".s3"
+          ".s"
         ],
         "configuration": "./config/language-configuration.json",
         "icon": {
