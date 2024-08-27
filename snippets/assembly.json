@@ -1,16 +1,16 @@
 {
   "Repeat":{
-    "prefix": ["repeat"],
+    "prefix": ["@repeat"],
     "body": [".rept \t${1:10}","${2:.int}\t${3:10}", ".endr","$0"],
     "description": "Repeat data initialization."
   },
   "Process Exit": {
-    "prefix": ["exit", "quit"],
+    "prefix": ["@exit", "@quit"],
     "body": ["MOV    X0, 0    /* status <- 0 */","MOV    X8, 93    /* exit() is system call #93 */","SVC    0    /* invoke system call */","$0"],
     "description": "Calls the exit instructions."
   },
   "Basic Assembly Program": {
-    "prefix": ["basic","beginner"],
+    "prefix": ["@basic","@beginner"],
     "body": [".text", "\t.global _start\n", "\t_start:    ","\t\t$0","\t\tMOV    X0, 0    /* status <- 0 */","\t\tMOV    X8, 93    /* exit() is system call #93 */","\t\tSVC    0    /* invoke system call */"],
     "description": "The most basic assembly program."
   }

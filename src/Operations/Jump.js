@@ -232,6 +232,11 @@ module.exports = [
         desc: "Changes PC to value in X30(LR).",
         insertTextType: "none",
         docs: "Modifies the program counter (PC) to the value in the link register (X30).<br><br>Warning, if `BL` was not called beforehand, this can have unpredictable behavior.",
+    },
+    {
+        label: "NOP",
+        desc: "No Operation.",
+        insertTextType: "newline",
+        docs: "No Operation does nothing, other than advance the value of the program counter by 4. This instruction can be used for instruction alignment purposes."
     }
-    
 ];

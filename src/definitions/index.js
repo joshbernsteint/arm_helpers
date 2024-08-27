@@ -26,7 +26,7 @@ const definitionProvider = vscode.languages.registerDefinitionProvider(constants
 
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
-    provideCompletionItems(document, position, _token){     
+    provideCompletionItems(document, position, _token){   
         return Object.entries(manager.getActiveLabels(true))
         .map(([lbl, desc]) => {
             if(!desc){

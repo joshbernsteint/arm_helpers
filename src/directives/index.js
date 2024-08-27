@@ -2,7 +2,6 @@ const vscode = require('vscode');
 const constants = require('../constants');
 const {formatComplete, formatDocs} = require('../utils/format');
 const settings = require('../utils/SettingsManger');
-const LabelManager = require('../utils/LabelManager');
 
 const definitions = [
     ...require('./Section'), 
@@ -22,7 +21,12 @@ settings.registerSettingChangeHandler(settings.spaceCommandName, () => {
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
     provideCompletionItems(document, position, token, context) {
-        return completionMap;
+        const line = document.lineAt(position.line).text;
+        const word = document.getText(document.getWordRangeAtPosition(position, constants.wordRegex));
+        
+        if(!/[\S]\./g.test(line) && word.charAt(0) === '.'){
+            return completionMap;
+        }
     }
 },'.');
 

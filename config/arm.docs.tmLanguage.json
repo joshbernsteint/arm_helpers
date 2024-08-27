@@ -91,11 +91,11 @@
             "patterns": [
                 {
                     "name": "support.function.load.arm",
-                    "match": "\\b(LDRSH|ldrsh|LDRSB|ldrsb|LDRH|ldrh|LDRB|ldrb|LDR|ldr|SVC|svc)\\s"
+                    "match": "\\b(LD(U|)RSH|LD(U|)Rsh|LD(U|)RSB|LD(U|)Rsb|LD(U|)RH|LD(U|)Rh|LD(U|)RB|LD(U|)Rb|LD(U|)R|LD(U|)R|SVC|svc|NOP)\\s"
                 },
                 {
                     "name": "support.function.store.arm",
-                    "match": "\\b(STRB|strb|STRH|strh|STR|str)\\s"
+                    "match": "\\b(ST(U|)RB|ST(U|)Rb|ST(U|)RH|ST(U|)Rh|ST(U|)R|ST(U|)R)\\s"
                 },
                 {
                     "name": "support.function.move.arm",
