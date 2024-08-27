@@ -43,7 +43,9 @@ By selecting the instruction (with the arrow keys) you can also view the instruc
 
 ### Memory Label Docstrings
 
-In addition to inline comments and above-line comments to describe labels, you can also use docstrings akin to higher-level languages. These are created by using `/* */` comments directly above a label declaration. You can view these docstrings by hovering over the label at any point of the code. Below are listed the type of docstring tags you can use. All of these tags are optional, and just having regular words with no tags will also create a docstring. 
+In addition to inline comments and above-line comments to describe labels, you can also use docstrings akin to higher-level languages. These are created by using `/* */` comments directly above a label declaration. You can view these docstrings by hovering over the label at any point of the code. Below are listed the type of docstring tags you can use. All of these tags are optional, and just having regular words with no tags will also create a docstring.    
+
+
 | Tag  | Example |     Description   |
 | :------:      | ------- |  -----            |
 | @param  |`@param First Operand`|     Declares a parameter for the label. Since there are no "variables", parameters are assumed to be registers. As a result, you don't need to declare their name (unlike other languages).                |
@@ -74,9 +76,9 @@ Sometimes pre-made snippets just aren't enough. As a result, this extension also
 |  `@[Register]['r'?]-[Register or Integer]`                                        |  `@X0-X9`           |   Creates a loop from the first register to the endpoint. This endpoint can either be in the form of a register or a static integer value. In the case of the optional 'r' flag being used, the source register will be set to 0 before the loop starts.                                                                                                                                                                                   |
 
 ## FAQ
-* > Will you add more instruction definitions?
+> Will you add more instruction definitions?
   * Yeah
-* > Why would you do this?
+> Why would you do this?
   * Idk
 ## Contributing
 You can make pull requests on the github. 
