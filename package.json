@@ -1,9 +1,9 @@
 {
-  "name": "ARMv8 Extension",
+  "name": "armhelpersdsfdsf",
   "displayName": "ARM Assembly Helpers",
   "description": "Tools to make coding in ARM Assembly easier and more efficient",
   "version": "1.0.0",
-  "publisher": "Joshua Bernstein",
+  "publisher": "JoshuaBernstein",
   "engines": {
     "vscode": "^1.89.0"
   },
@@ -68,6 +68,7 @@
       }
     }
   },
+  "repository": "github:joshbernsteint/arm_helpers",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",

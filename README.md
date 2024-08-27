@@ -1,6 +1,5 @@
 # Arm Assembly Helpers <!-- omit in toc -->
 *By Joshua Bernstein*
-
 This is an extension to add syntax highlighting and instruction definitions for Armv8 assembly language. This extension is still very much a WIP. If you find any issues or bugs, please report them on the GitHub [here](https://github.com/joshbernsteint/arm_helpers), and I will try to resolve it quickly.
 
 - [Features](#features)
