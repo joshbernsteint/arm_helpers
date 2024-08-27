@@ -1,5 +1,7 @@
 const {Types} = require('../constants');
 
+const registerOrImmediate = `${Types.REG} | ${Types.SIM9}`;
+
 module.exports = [
     {
         label: "ADD",
@@ -19,7 +21,7 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
@@ -42,7 +44,7 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
@@ -65,7 +67,7 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
@@ -88,7 +90,7 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
@@ -111,14 +113,14 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
     },
     {
         label: "SDIV",
-        desc: "Divides two numbers (Signed)",
+        desc: "Divides two numbers (Signed).",
         insertTextType: "basic3",
         docs: "Divides two signed numbers stored in registers `Ra` and `Rb` and stores the result into register `Rdest`.",
         params: [
@@ -134,14 +136,14 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
     },
     {
         label: "UDIV",
-        desc: "Divides two numbers (Unsigned)",
+        desc: "Divides two numbers (Unsigned).",
         insertTextType: "basic3",
         docs: "Divides two unisgned numbers stored in registers `Ra` and `Rb` and stores the result into register `Rdest`.",
         params: [
@@ -157,10 +159,9 @@ module.exports = [
             },
             {
                 name: "Rb",
-                type: `${Types.REG} | ${Types.SIM9}`,
+                type: registerOrImmediate,
                 desc: "Source register 2 or an immediate number.",
             },
         ]
     },
-
 ];

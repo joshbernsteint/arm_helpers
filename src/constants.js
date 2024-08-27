@@ -19,7 +19,8 @@ const Types = Object.freeze({
     SIM9: "Simm9", //Signed 9-bit Immediate Number
     REG: "Register", //Register
     LBL: "Label", //Memory label,
-    FREG: "FRegister" //Floating point Register
+    FREG: "FRegister", //Floating point Register,
+    INT: "Integer",
 });
 
 
@@ -27,7 +28,7 @@ module.exports = {
     docsId: "armv8_docs",
     id: "armv8",
     CompletionTypes: vscode.CompletionItemKind,
-    wordRegex: /[^\n\s\-,\/\\:]+/g,
+    wordRegex: /[^\n\s\-,\/\\=:]+/g,
     memberRegex: /[^\n\s\-,\/\\:]+/g,
     Types,
     insertTextMap,
@@ -37,8 +38,8 @@ module.exports = {
             section: `\n${spaces}`,
             space: " ",
             basic1: ` ${spaces}$\{1\}`,
-            basic2: ` ${spaces}$\{1\} $\{2\}`,
-            basic3: ` ${spaces}$\{1\} $\{2\} $\{3\}`,
+            basic2: ` ${spaces}$\{1\}, $\{2\}`,
+            basic3: ` ${spaces}$\{1\}, $\{2\}, $\{3\}`,
         }
     }
 };

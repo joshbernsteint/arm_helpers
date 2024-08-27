@@ -71,7 +71,11 @@
                 },
                 {
                     "name": "string.regexp.directive.type.align_reserve",
-                    "match": "\\s*\\.(balign|fill|space|skip|rept|endr)"
+                    "match": "\\s*\\.(fill|space|skip|rept|endr|align)"
+                },
+                {
+                    "name": "string.regexp.directive.type.align.space",
+                    "match": "\\s*\\.(balign|p2align)(l|w|)"
                 },
                 {
                     "name": "invalid.illegal.directive",

@@ -107,14 +107,14 @@ function formatFunctionDocs(funcName, detailObj={docs:"", params:[], extra: unde
             let tempString = ` ${name}: ${type}`;
             if(i > 0) tempString = ',' + tempString;
             titleString += tempString;
-            bodyList.push(`<em>@param</em> \`${name}\` &mdash; ${desc}`)
+            bodyList.push(`<p><em>@param</em> \`${name}\` &mdash; ${desc}</p>`)
         });
     }
     if(extra){
 
     }
 
-    const result = new HoverString(titleString, bodyList.join('<br>'));
+    const result = new HoverString(titleString, bodyList.join(''));
     return result;
 
 }

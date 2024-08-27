@@ -56,4 +56,58 @@ module.exports = [
             }
         ]
     },
+    {
+        label: "STUR",
+        desc: "Stores 4/8 bytes to memory (Unscaled).",
+        insertTextType: "basic2",
+        docs: "Stores 4/8 bytes to `addr` from the source register `Rsrc`. \n\nAmount moved depends on the register type of the source register. 4 bytes if it is a W register, and 8 bytes with an X register. If the offset is used, the value does not have to a multiple of 4, and can be any valid immediate number.",
+        params: [
+            {
+                name: "Rsrc",
+                type: Types.REG,
+                desc: "Source register."
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by another register and an immediate number."
+            }
+        ]
+    },
+    {
+        label: "STURB",
+        desc: "Stores 1 byte to memory (Unscaled).",
+        insertTextType: "basic2",
+        docs: "Stores 1 byte to `addr` from the source register `Rsrc`. If the offset is used, the value does not have to a multiple of 4, and can be any valid immediate number.",
+        params: [
+            {
+                name: "Rsrc",
+                type: Types.REG,
+                desc: "Source register."
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by another register and an immediate number."
+            }
+        ]
+    },
+    {
+        label: "STURH",
+        desc: "Stores 2 bytes to memory (Unscaled).",
+        insertTextType: "basic2",
+        docs: "Stores 2 bytes to `addr` from the source register `Rsrc`. \n\nAmount moved depends on the register type of the source register. 4 bytes if it is a W register, and 8 bytes with an X register. If the offset is used, the value does not have to a multiple of 4, and can be any valid immediate number.",
+        params: [
+            {
+                name: "Rsrc",
+                type: Types.REG,
+                desc: "Source register."
+            },
+            {
+                name: "addr",
+                type: addrString,
+                desc: "Address in memory. This can either be from just a register, or a register with an offset denoted by another register and an immediate number."
+            }
+        ]
+    },
 ];

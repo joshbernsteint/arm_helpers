@@ -67,7 +67,7 @@
                 },
                 {
                     "name": "support.class.directive.types.type",
-                    "match": "\\s*(Register|Simm9|Imm9|Label|Address|Instruction|FRegister|Directive)"
+                    "match": "\\s*(Register|Simm9|Imm9|Label|Address|Instruction|FRegister|Directive|Integer)"
                 },
                 {
                     "name": "support.class.directive.type.string",
@@ -75,7 +75,11 @@
                 },
                 {
                     "name": "string.regexp.directive.type.align_reserve",
-                    "match": "\\s*(balign|fill|space|skip|rept|endr)"
+                    "match": "\\s*(fill|space|skip|rept|endr|align)"
+                },
+                {
+                    "name": "string.regexp.directive.type.align.space",
+                    "match": "\\s*\\.(balign|p2align)(l|w|)"
                 },
                 {
                     "name": "invalid.illegal.directive",

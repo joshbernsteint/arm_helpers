@@ -7,6 +7,7 @@ const LabelManager = require('../utils/LabelManager');
 const definitions = [
     ...require('./Section'), 
     ...require('./Types'),
+    ...require('./Alignment'),
 ];
 
 const generateMaps = () => {
@@ -21,9 +22,7 @@ settings.registerSettingChangeHandler(settings.spaceCommandName, () => {
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
     provideCompletionItems(document, position, token, context) {
-        const {text, firstNonWhitespaceCharacterIndex} = document.lineAt(position);
-        if(text[firstNonWhitespaceCharacterIndex] === ".")
-            return completionMap;
+        return completionMap;
     }
 },'.');
 
