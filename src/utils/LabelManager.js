@@ -44,8 +44,7 @@ class LabelManager{
     findLabel(lbl, defLine=-1){
         // Find the definition location
         const startLine = defLine !== -1 ?  defLine : this.activeDocument.positionAt(this.activeDocument.getText().search(lbl + ":")).line;
-        let newLabel = undefined;   
-        
+        let newLabel = undefined;        
         let curLine = startLine - 1;
         let foundDocs = false;
 

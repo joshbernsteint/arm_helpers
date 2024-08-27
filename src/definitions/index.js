@@ -26,11 +26,14 @@ const definitionProvider = vscode.languages.registerDefinitionProvider(constants
 
 
 const completionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
-    provideCompletionItems(document, position, _token){        
+    provideCompletionItems(document, position, _token){     
         return Object.entries(manager.getActiveLabels(true))
         .map(([lbl, desc]) => {
+            if(!desc){
+                desc = {content: ""};
+            }
             desc = Array.isArray(desc.content) ? desc.content[0] : desc.content;
-            return new vscode.CompletionItem({label: lbl, description: `${desc} (Jump Label)`}, constants.CompletionTypes.Constant)
+            return new vscode.CompletionItem({label: lbl, description: `${desc} (Memory Label)`}, constants.CompletionTypes.Constant)
         });
     }
 });
