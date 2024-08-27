@@ -7,8 +7,8 @@ function generateTextMap(spaces){
         section: `\n${spaces}`,
         space: " ",
         basic1: ` ${spaces}$\{1\}`,
-        basic2: ` ${spaces}$\{1\} $\{2\}`,
-        basic3: ` ${spaces}$\{1\} $\{2\} $\{3\}`,
+        basic2: ` ${spaces}$\{1\}, $\{2\}`,
+        basic3: ` ${spaces}$\{1\}, $\{2\}, $\{3\}`,
     }
 }
 

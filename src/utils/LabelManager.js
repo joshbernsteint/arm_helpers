@@ -168,6 +168,9 @@ class LabelManager{
         return res.content;
     }
 
+    static getRegexes(){
+        return COMMENT_REGEXES;
+    }
 }
 
 module.exports = LabelManager;

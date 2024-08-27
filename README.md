@@ -9,6 +9,7 @@ This is an extension to add syntax highlighting and instruction definitions for 
   - [Auto Completion](#auto-completion)
   - [Memory Label Docstrings](#memory-label-docstrings)
   - [Pre-made code snippets](#pre-made-code-snippets)
+  - [Macro Commands](#macro-commands)
 - [FAQ](#faq)
 - [Contributing](#contributing)
 
@@ -64,6 +65,14 @@ There are default snippet statements you can use to expedite coding.
 * Using the `exit` snippet will add the exit protocol.
 * The `repeat` snippet will add the `.rept` directive. It also aligns the cursor to select the number of repitions, the "type" directive, and the value to be repeated.
 
+### Macro Commands
+Sometimes pre-made snippets just aren't enough. As a result, this extension also has macro abbreviations built in. If you have used HTML before in VSCode, they are similar to Emmet Abbreviations. By typing the macro symbol `@` followed by the arguments. As of now, here are the usable macros:
+
+|                  Format                  |   Example  | Description                                                                                                                                                                                        |
+|:----------------------------------------:|:----------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `@[Integer]`                      | `@32`      | Allocates [Number] amount of bytes onto the stack. At the same time, saving the link register onto the stack.                                                                                      |
+| `@[Letters or Numbers]:[Integer]` | `@test:32` | Declares the label defined by the sequence of letters and numbers before the semicolon. It then allocates [Number] amount of bytes onto the stack. It also saves the link register onto the stack. |
+|  `@[Register]['r'?]-[Register or Integer]`                                        |  `@X0-X9`           |   Creates a loop from the first register to the endpoint. This endpoint can either be in the form of a register or a static integer value. In the case of the optional 'r' flag being used, the source register will be set to 0 before the loop starts.                                                                                                                                                                                   |
 
 ## FAQ
 * > Will you add more instruction definitions?
