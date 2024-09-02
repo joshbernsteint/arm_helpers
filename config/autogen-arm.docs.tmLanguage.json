@@ -1,13 +1,13 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "arm",
-	"patterns": [
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "arm.docs",
+    "patterns": [
         {
             "include": "#parens"
         },
-		{
-			"include": "#comment"
-		},
+        {
+            "include": "#comment"
+        },
         {
             "include": "#strings"
         },
@@ -24,6 +24,14 @@
             "include": "#numbers"
         },
         {
+            "name": "keyword.operator.hoverEqual",
+            "match": "=="
+        },
+        {
+            "name": "constant.language.keywords",
+            "match": "\\b(addr|src|num|label|expr)\\b"
+        },
+        {
             "name": "support.variable.label",
             "begin": "[^:\\s\\n,=\\.\\\\]",
             "end": ":|\\s|\\n",
@@ -33,8 +41,8 @@
                 }
             ]
         }
-	],
-	"repository": {
+    ],
+    "repository": {
         "comment": {
             "patterns": [
                 {
@@ -57,24 +65,28 @@
         "directives": {
             "patterns": [
                 {
+                    "name": "support.class.directive.types.type",
+                    "match": "\\s*(Register|Simm9|Imm9|Label|Address|Instruction|FRegister|Directive|Integer)"
+                },
+                {
                     "name": "keyword.control.directive.sections.arm",
-                    "match": "\\s*\\.(DATA|data|IWRAM|iwram|BSS|bss|EWRAM|ewram|SBSS|sbss|TEXT|text|RODATA|rodata|GLOBAL|global|EXTERN|extern)"
+                    "match": "\\s*(DATA|data|IWRAM|iwram|BSS|bss|EWRAM|ewram|SBSS|sbss|TEXT|text|RODATA|rodata|GLOBAL|global|EXTERN|extern)"
                 },
                 {
                     "name": "support.class.directive.type.number",
-                    "match": "\\s*\\.(byte|int|hword|word|quad|dword|octa|single|float|double|(1|2|4|8)byte|dc\\.(b|w|l|a|d|s)|dc|short|value|long|xword)"
+                    "match": "\\s*(byte|int|hword|word|quad|dword|octa|single|float|double|(1|2|4|8)byte|dc(b|w|l|a|d|s)|dc|short|value|long|xword)"
                 },
                 {
                     "name": "support.class.directive.type.string",
-                    "match": "\\s*\\.(ascii|asciz|string)"
+                    "match": "\\s*(ascii|asciz|string)"
                 },
                 {
                     "name": "string.regexp.directive.type.align_reserve",
-                    "match": "\\s*\\.(fill|space|skip|rept|endr|align)"
+                    "match": "\\s*(fill|space|skip|rept|endr|align)"
                 },
                 {
                     "name": "string.regexp.directive.type.align.space",
-                    "match": "\\s*\\.(balign|p2align)(l|w|)"
+                    "match": "\\s*(balign|p2align)(l|w|)"
                 },
                 {
                     "name": "invalid.illegal.directive",
@@ -82,7 +94,7 @@
                 }
             ]
         },
-        "instruction":{
+        "instruction": {
             "patterns": [
                 {
                     "name": "support.function.load.arm",
@@ -151,7 +163,7 @@
                 {
                     "name": "constant.language.arm.register.named",
                     "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\b\\b)"
-                }  
+                }
             ]
         },
         "strings": {
@@ -161,7 +173,9 @@
                     "begin": "\"",
                     "end": "\"",
                     "patterns": [
-                        { "include": "#stringEscape"}
+                        {
+                            "include": "#stringEscape"
+                        }
                     ]
                 },
                 {
@@ -169,7 +183,9 @@
                     "begin": "'",
                     "end": "'",
                     "patterns": [
-                        { "include": "#stringEscape"}
+                        {
+                            "include": "#stringEscape"
+                        }
                     ]
                 }
             ]
@@ -179,6 +195,5 @@
             "match": "\\\\(U[a-fA-F0-9]{8}|u[a-fA-F0-9]{4}|x[a-fA-F0-9]{2,8}|[0-7]{3}|[\\S])"
         }
     },
-
-	"scopeName": "text.assembly.arm"
+    "scopeName": "text.assembly.arm.docs"
 }

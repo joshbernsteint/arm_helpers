@@ -48,7 +48,6 @@ function generateAllocateString(amount){
 }
 
 const loopRegex = /(x|X|r|R|w|W|d|D|s|S)([0-9]{1,2})(r|)-([0-9]+|(x|X|r|R|w|W|d|D|s|S)[0-9]{1,2})/g;
-const t = /(x|X|r|R|w|W|d|D|s|S)([0-9]{1,2})/g;
 
 const macroCompletionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
     provideCompletionItems(document, position, token, context) {

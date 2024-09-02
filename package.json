@@ -44,7 +44,7 @@
       {
         "language": "armv8_docs",
         "scopeName": "text.assembly.arm.docs",
-        "path": "./config/arm.docs.tmLanguage.json"
+        "path": "./config/autogen-arm.docs.tmLanguage.json"
       }
     ],
     "snippets": [
@@ -66,9 +66,11 @@
   },
   "repository": "github:joshbernsteint/arm_helpers",
   "scripts": {
+    "commit": "./scripts/",
+    "build": "powershell scripts/buildDoc.bat",
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "vscode-test"
+    "test": "echo hio"
   },
   "devDependencies": {
     "@types/vscode": "^1.89.0",

@@ -26,10 +26,13 @@ const escapeCodesMap = Object.freeze({
     "e": 27,
 });
 
-const escapeCharacterHover = vscode.languages.registerHoverProvider(constants.id, {
-    provideHover(document, position, _token){
-        const range = document.getWordRangeAtPosition(position, /\\(U[a-fA-F0-9]{8}|u[a-fA-F0-9]{4}|x[a-fA-F0-9]{2,8}|[0-7]{3}|[\S])/);
-        if(!range.isSingleLine) return undefined;
+const escapeRegex =  /\\(U[a-fA-F0-9]{8}|u[a-fA-F0-9]{4}|x[a-fA-F0-9]{2,8}|[0-7]{3}|[\S])/g;
+
+const baseHovers = [
+    //Escape characters
+    (document, position) => {
+        const range = document.getWordRangeAtPosition(position, escapeRegex);
+        if(!range || !range.isSingleLine) return undefined;
 
         let asciiValue = -1;
         const word = document.getText(range).substring(1);
@@ -54,11 +57,44 @@ const escapeCharacterHover = vscode.languages.registerHoverProvider(constants.id
             }
         }
         
-        return asciiValue === -1 ? undefined : new vscode.Hover(new HoverString(`"\\${word}" == ${asciiValue}`));
+        return asciiValue === -1 ? undefined : new HoverString(`'\\${word}' == ${asciiValue}`);
+    },
+
+    // String Hover
+    (document, position) => {
+        const range = document.getWordRangeAtPosition(position, /"((?:[^"\\]|\\.)*)"/);
+        if(!range) return undefined;
+        const string = document.getText(range);    
+
+        let content = string.match(/"((?:[^"\\]|\\.)*)"/)[1];
+        content = content.replaceAll(escapeRegex, "1");
+        return `Length: ${content.length + 1} (${content.length} + 1)`;
+    },
+
+    // Hex Hover
+    (document, position) => {
+        const text = document.getText(document.getWordRangeAtPosition(position));
+        const testNum = Number(text);
+        if(!text.startsWith("0x") || isNaN(testNum)){
+            return undefined;
+        }
+
+        return `${testNum}`;
     }
-});
+]
+
+const baseHoverProvider = vscode.languages.registerHoverProvider(constants.id, {
+    provideHover(document, position, _token){
+        for (const item of baseHovers) {
+            const result = item(document, position);
+            if(result) return new vscode.Hover(result);
+        }
+
+        return undefined;
+    }
+})
 
 module.exports = [
     docStringCompletion,
-    escapeCharacterHover
+    baseHoverProvider
 ];

@@ -33,8 +33,10 @@ class LabelManager{
         
         for (let i = 0; i < this.activeDocument.lineCount; i++) {
             const line = this.activeDocument.lineAt(i).text;
-            const curLineRes = line.match(this.regexes.labelRegex);
+            let curLineRes = line.match(this.regexes.labelRegex);
+            
             if(curLineRes){
+                curLineRes[0] = curLineRes[0].trim();
                 const newLabel = curLineRes[0].substring(0, curLineRes[0].length - 1);
                 this.findLabel(newLabel, i);
             } 
