@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const settings = require('./utils/SettingsManger');
+
 
 const Types = Object.freeze({
     ADDS: "Address", //Address 
@@ -22,11 +22,11 @@ module.exports = {
         return {
             none: "",
             section: `\n${spaces}`,
-            space: " ",
+            space: "",
             newline: "\n",
-            basic1: ` ${spaces}$\{1\}`,
-            basic2: ` ${spaces}$\{1\}, $\{2\}`,
-            basic3: ` ${spaces}$\{1\}, $\{2\}, $\{3\}`,
+            basic1: `${spaces}$\{1\}`,
+            basic2: `${spaces}$\{1\}, $\{2\}`,
+            basic3: `${spaces}$\{1\}, $\{2\}, $\{3\}`,
         }
     }
 };

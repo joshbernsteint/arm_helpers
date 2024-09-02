@@ -47,7 +47,26 @@ function generateAllocateString(amount){
     return `SUB ${settings.spaceString}SP, SP, ${amount}\nSTR ${settings.spaceString}LR, [SP]\n$\{1:/* Code Here */\}\nLDR ${settings.spaceString}LR, [SP]\nADD ${settings.spaceString}SP, SP, ${amount}\n$0`;
 }
 
-const loopRegex = /(x|X|r|R|w|W|d|D|s|S)([0-9]{1,2})(r|)-([0-9]+|(x|X|r|R|w|W|d|D|s|S)[0-9]{1,2})/g;
+const loopRegex = /(x|X|r|R|w|W|d|D|s|S)([0-9]{1,2})(r|)(-|!=|==|<|<=|>|>=)([0-9]+|(x|X|r|R|w|W|d|D|s|S)[0-9]{1,2})/g;
+
+// Each value is the negation of the inputted key
+const whileLoopMap = Object.freeze({
+    "<":  "B.GE",
+    "<=": "B.GT",
+    "!=": "B.EQ",
+    "==": "B.NE",
+    ">":  "B.LE",
+    ">=": "B.LT",
+});
+
+const whileLoopTextMap = Object.freeze({
+    "<":  "less_than",
+    "<=": "less_than_or_equal_to",
+    "!=": "not_equal_to",
+    "==": "equal_to",
+    ">":  "greater_than",
+    ">=": "greater_than_or_equal_to",
+});
 
 const macroCompletionProvider = vscode.languages.registerCompletionItemProvider(constants.id, {
     provideCompletionItems(document, position, token, context) {
@@ -91,42 +110,73 @@ const macroCompletionProvider = vscode.languages.registerCompletionItemProvider(
                 }
             }
             else if(macroContent.search(loopRegex) !== -1){
-                const contents = Array.from(macroContent.matchAll(loopRegex))[0];
+                const contents = Array.from(macroContent.matchAll(loopRegex))[0];                
                 const sourceRegister = contents[1].toUpperCase() + contents[2];
+                const op = contents[4];
                 let endValue;
                 const snippetBody = [];
-                if(isNaN(Number(contents[4]))){
+                if(isNaN(Number(contents[5]))){
                     // Loop from one register value to another
-                    endValue = contents[4].toUpperCase();
+                    endValue = contents[5].toUpperCase();
                 }
                 else{
                     // Loop from 0 to a static value
-                    endValue = Number(contents[4]);
+                    endValue = Number(contents[5]);
                 }
 
                 if(contents[3]){
                     snippetBody.push(`MOV ${settings.spaceString}${sourceRegister}, 0`);
                 }
 
-                const startLabel = `loop_${sourceRegister}_to_${endValue}_start`;
-                const endLabel = `loop_${sourceRegister}_to_${endValue}_end`;
-                snippetBody.push(
-                    `\${1:${startLabel}}:`,
-                    `CMP ${settings.spaceString}${sourceRegister}, ${endValue}`,
-                    `B.EQ${settings.spaceString}\${2}`,
-                    "${3:/* Code Here */}",
-                    `ADD ${settings.spaceString}${sourceRegister}, ${sourceRegister}, 1`,
-                    `B   ${settings.spaceString}\${1}`,
-                    `\${2:${endLabel}}:`,
-                    "$0"
-                );
 
+                let completionLabel;
+                
+                if(op === "-"){ //If it's a for loop
+                    const startLabel = `loop_${sourceRegister}_to_${endValue}_start`;
+                    const endLabel = `loop_${sourceRegister}_to_${endValue}_end`;
+                    snippetBody.push(
+                        `\${1:${startLabel}}:`,
+                        `CMP ${settings.spaceString}${sourceRegister}, ${endValue}`,
+                        `B.EQ${settings.spaceString}\${2}`,
+                        "${3:/* Loop Body Here */}",
+                        `ADD ${settings.spaceString}${sourceRegister}, ${sourceRegister}, 1`,
+                        `B   ${settings.spaceString}\${1}`,
+                        `\${2:${endLabel}}:`,
+                        "$0"
+                    );
+                    completionLabel = `Loop from ${sourceRegister} to ${endValue}.`;
+                }
+                else{ //If it's a while loop
+                    completionLabel = `Loop while ${sourceRegister} ${op} ${endValue}.`
+                    const startLabel = `loop_${sourceRegister}_${whileLoopTextMap[op]}_${endValue}_start`;
+                    const endLabel = `loop_${sourceRegister}_${whileLoopTextMap[op]}_${endValue}_end`;
+                    if(op === "==" || op === "!=" && endValue === 0){
+                        snippetBody.push(
+                            `\${1:${startLabel}}:`,
+                            `${op === "==" ? "CBNZ" : "CBZ"}${settings.spaceString}${sourceRegister}, \${2}`,
+                            "${3:/* Loop Body Here */}",
+                            `B   ${settings.spaceString}\${1}`,
+                            `\${2:${endLabel}}:`,
+                            "$0"
+                        );
+                    }
+                    else{
+                        snippetBody.push(
+                            `\${1:${startLabel}}:`,
+                            `CMP ${settings.spaceString}${sourceRegister}, ${endValue}`,
+                            `${whileLoopMap[op]}${settings.spaceString}\${2}`,
+                            "${3:/* Loop Body Here */}",
+                            `B   ${settings.spaceString}\${1}`,
+                            `\${2:${endLabel}}:`,
+                            "$0"
+                        );
+                    }
+                }
 
                 const result = new vscode.CompletionItem({
-                    label: `Loop from ${sourceRegister} to ${endValue}.`,
+                    label: completionLabel,
                     description: `Abbreviation`
                 }, constants.CompletionTypes.Snippet);
-                
                 result.insertText = new vscode.SnippetString(snippetBody.join('\n'));
                 result.additionalTextEdits = [vscode.TextEdit.delete(range)];
                 return [result];

@@ -14,7 +14,7 @@ function formatDocs(items=[{label: "", insertText: "", desc: "", docs: "", param
     const textMap = constants.getTextMap(settings.spaceString);
     for (const item of items) {
         const newInsertText = (item.insertTextType === "custom") ? item.insertText : textMap[item.insertTextType];
-        item.insertText = new vscode.SnippetString(item.label + newInsertText);
+        item.insertText = new vscode.SnippetString(item.label + (item.label.length < settings.spaceString.length ? "\t" : "") + newInsertText);
         item.docs = formatFunctionDocs(prefix+item.label, item, type);
         result.push(item);
     }
