@@ -43,6 +43,7 @@ const hoverProvider = vscode.languages.registerHoverProvider(constants.id, {
     provideHover(document, position, _token){
         const word = document.getText(document.getWordRangeAtPosition(position, constants.wordRegex));
         const label = manager.getLabel(word);
+        
         if(label)
             return new vscode.Hover(new HoverString(`${constants.Types.LBL} ${word}`, label));
     }

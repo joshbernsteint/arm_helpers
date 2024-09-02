@@ -11,16 +11,17 @@ class HoverString extends vscode.MarkdownString{
             this.appendMarkdown(body);
         }
         else{
-            //Parse docstring
+            //Parse docstring            
             body.forEach(e => {
                 if(typeof e === "string"){
-                    this.appendMarkdown(e);
+                    // Not having the span there causes things to not work. I have no idea why though.
+                    this.appendMarkdown("<span></span>"+e);
                 }
                 else{
                     if(e.before) this.appendMarkdown(e.before);
                     this.appendCodeblock(e.content, e.language || id);
                 }
-            })
+            })            
         }
     }
 }

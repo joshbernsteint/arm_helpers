@@ -42,7 +42,7 @@ function parseDocString(str){
 
     // Get generic description
     const foundDesc = matchEvery(str, docStringRegexes.desc);
-    if(foundDesc.length > 0){
+    if(foundDesc.length > 0 && foundDesc[0][1].length > 0){
         construct.push(`${foundDesc[0][1].trim()}   `);
     }
 
@@ -83,7 +83,7 @@ function parseDocString(str){
                 content: desc.trim(),
             });
         });
-    }
+    }    
     
     return (construct.length === 0) ? str : construct;
 }

@@ -86,6 +86,7 @@ class LabelManager{
                         labelType: "doc"
                     };
                     foundDocs = true;
+                    
                 } 
             }
         }
