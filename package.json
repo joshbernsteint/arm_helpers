@@ -66,11 +66,7 @@
   },
   "repository": "github:joshbernsteint/arm_helpers",
   "scripts": {
-    "commit": "./scripts/",
-    "build": "powershell scripts/buildDoc.bat",
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "echo hio"
+    "build": "powershell scripts/buildDoc.bat"
   },
   "devDependencies": {
     "@types/vscode": "^1.89.0",

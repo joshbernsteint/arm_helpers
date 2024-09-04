@@ -24,6 +24,16 @@ class HoverString extends vscode.MarkdownString{
             })            
         }
     }
+
+    appendTable(cols=[], rows=[]){
+        const stringConstruct = ["\n"];
+        stringConstruct.push(
+            cols.reduce((prev, cur) => `${prev} ${cur} |`, "|"),
+            cols.reduce((prev) => `${prev} :---: |`, "|"),
+            ...rows.map(e => e.reduce((prev, cur) => `${prev} ${cur} |`, "|"))
+        );        
+        this.appendMarkdown(stringConstruct.join('\n'));
+    }
 }
 
 module.exports = HoverString;

@@ -31,6 +31,20 @@ toObj.repository.directives.patterns.unshift(
     }
 );
 
+toObj.repository.registers.patterns = [
+    {
+        "name": "constant.language.arm.register.integer",
+        "match": "(\\[|^|\\s|\\b\\b)(x|X|w|W|r|R)([a-zA-Z]|dest|src)(\\]|\\b\\b)"
+    },
+    {
+        "name": "constant.language.arm.register.float",
+        "match": "(\\[|^|\\s|\\b\\b)(h|H|s|S|d|D)([a-zA-Z]|dest|src)(\\]|\\b\\b)"
+    },
+    {
+        "name": "constant.language.arm.register.named",
+        "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\]|\\b\\b)"
+    }  
+];
 
 
 toObj.scopeName = toObj.scopeName + ".docs"

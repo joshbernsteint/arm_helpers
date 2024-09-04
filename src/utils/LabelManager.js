@@ -9,6 +9,7 @@ const COMMENT_REGEXES = Object.freeze({
 
 const DEFAULT_CONFIG = {
     maxFiles: -1,
+    maxCheckTimeout: 10000
 };
 
 class LabelManager{
@@ -17,7 +18,9 @@ class LabelManager{
         this.versionMap = {};
         this.activeDocument = currentEditor ? currentEditor.document : undefined;
         this.activeFile = this.activeDocument ? this.activeDocument.fileName : "";
+        this.maxCheckTimeout = config.maxCheckTimeout || 10000;
         this.regexes = {...COMMENT_REGEXES};
+        this.checkTimeout = undefined;
         vscode.window.onDidChangeActiveTextEditor(e => this.handleDocumentChange(e));
 
         if(this.activeDocument)
@@ -124,8 +127,11 @@ class LabelManager{
     }
 
     getActiveLabels(getLatest=false){
-        if(getLatest){
+        if(getLatest && !this.checkTimeout){
             this.initializeLabels();
+            this.checkTimeout = setTimeout(() => {
+                this.checkTimeout = undefined
+            }, this.maxCheckTimeout);
         }
         return this.labels[this.activeFile];
     }
