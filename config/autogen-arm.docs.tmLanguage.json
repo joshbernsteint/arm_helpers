@@ -138,7 +138,7 @@
             "patterns": [
                 {
                     "name": "constant.numeric.arm",
-                    "match": "(|-)[0-9]+(\\.?)[0-9]*\\b"
+                    "match": "(#|)(-|)[0-9]+(\\.?)[0-9]*\\b"
                 },
                 {
                     "name": "constant.numeric.arm.hex",
@@ -154,15 +154,15 @@
             "patterns": [
                 {
                     "name": "constant.language.arm.register.integer",
-                    "match": "(\\[|^|\\s|\\b\\b)(x|X|w|W|r|R)(([1-2][0-9])|(3[0-1])|[0-9])(\\]|\\b\\b)"
+                    "match": "(\\[|^|\\s|\\b\\b)(x|X|w|W|r|R)([a-zA-Z]|dest|src)(\\]|\\b\\b)"
                 },
                 {
                     "name": "constant.language.arm.register.float",
-                    "match": "(\\[|^|\\s|\\b\\b)(h|H|s|S|d|D)(([1-2][0-9])|(3[0-1])|[0-9])(\\]|\\b\\b)"
+                    "match": "(\\[|^|\\s|\\b\\b)(h|H|s|S|d|D)([a-zA-Z]|dest|src)(\\]|\\b\\b)"
                 },
                 {
                     "name": "constant.language.arm.register.named",
-                    "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\b\\b)"
+                    "match": "(\\[|^|\\s|\\b\\b)(fp|FP|lr|LR|sp|SP|pc|PC|zr|xzr|ZR|XZR|wzr|WZR)(\\]|\\b\\b)"
                 }
             ]
         },
