@@ -2,11 +2,11 @@ const vscode = require('vscode');
 const {docsId, id} = require('../constants');
 
 class HoverString extends vscode.MarkdownString{
-    constructor(title, body=""){
+    constructor(title, body="", titleCodeId=docsId){
         super('');
         this.supportHtml = true;
         this.isTrusted = true;
-        this.appendCodeblock(title, docsId);
+        this.appendCodeblock(title, titleCodeId);
         if(!Array.isArray(body)){
             this.appendMarkdown(body);
         }

@@ -51,7 +51,7 @@
                     "name": "comment.block.arm",
                     "patterns": [
                         {
-                            "match": "@(param|example|returns|modifies|desc|restores)",
+                            "match": "@(param|example|returns|modifies|desc|restores|asC)",
                             "name": "constant.language.docs"
                         }
                     ]

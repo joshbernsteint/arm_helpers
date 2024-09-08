@@ -27,8 +27,9 @@ const docStringRegexes = Object.freeze({
     return:/@return(?:s|)\s*(.*)/g,
     modifies: /@modifies\s*(.*)/g,
     restores: /@restores\s*(.*)/g,
+    asC: /@asC\s*(.*)/g,
     example: /@example([\s\S]+?)(?=(?:\*\/|@param|@return(?:s|)|@example|@modifies|@restores))/gm,
-    desc: /^([\s\S]*?)(?:@(?:param|return(?:s|)|example|restores|modifies))/g,
+    desc: /^([\s\S]*?)(?:@(?:param|return(?:s|)|example|restores|modifies|asC))/g,
 });
 
 
@@ -83,7 +84,16 @@ function parseDocString(str){
                 content: desc.trim(),
             });
         });
-    }    
+    }
+
+    const foundCDefinition = matchEvery(str, docStringRegexes.asC)
+    if(foundCDefinition.length > 0){
+        construct.unshift({
+            content: foundCDefinition[0][1],
+            language: 'c',
+            newHeader: true
+        })
+    }
     
     return (construct.length === 0) ? str : construct;
 }

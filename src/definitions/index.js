@@ -42,10 +42,15 @@ const completionProvider = vscode.languages.registerCompletionItemProvider(const
 const hoverProvider = vscode.languages.registerHoverProvider(constants.id, {
     provideHover(document, position, _token){
         const word = document.getText(document.getWordRangeAtPosition(position, constants.wordRegex));
-        const label = manager.getLabel(word);
+        const label = manager.getLabel(word);        
         
-        if(label)
-            return new vscode.Hover(new HoverString(`${constants.Types.LBL} ${word}`, label));
+        if(label){
+            if(label[0].newHeader){
+                return new vscode.Hover(new HoverString(label[0].content, label.slice(1), 'c'));
+            }
+            else
+                return new vscode.Hover(new HoverString(`${constants.Types.LBL} ${word}`, label));
+        }
     }
 })
 
