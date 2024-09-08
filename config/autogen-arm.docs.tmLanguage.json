@@ -24,8 +24,8 @@
             "include": "#numbers"
         },
         {
-            "name": "keyword.operator.hoverEqual",
-            "match": "=="
+            "name": "keyword.operator.math",
+            "match": "(==|-|\\+|!=)"
         },
         {
             "name": "constant.language.keywords",
@@ -90,7 +90,11 @@
                 },
                 {
                     "name": "invalid.illegal.directive",
-                    "match": "\\s*\\.(.*)"
+                    "match": "\\s*\\.([^\\s\\-\\+]+)"
+                },
+                {
+                    "name": "keyword.control.current",
+                    "match": ""
                 }
             ]
         },
