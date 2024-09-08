@@ -24,6 +24,10 @@
             "include": "#numbers"
         },
         {
+            "name": "keyword.operator.math",
+            "match": "(==|-|\\+|!=)"
+        },
+        {
             "name": "support.variable.label",
             "begin": "[^:\\s\\n,=\\.\\\\]",
             "end": ":|\\s|\\n",
@@ -78,7 +82,11 @@
                 },
                 {
                     "name": "invalid.illegal.directive",
-                    "match": "\\s*\\.(.*)"
+                    "match": "\\s*\\.([^\\s\\-\\+]+)"
+                },
+                {
+                    "name": "keyword.control.current",
+                    "match": "\\."
                 }
             ]
         },

@@ -6,10 +6,6 @@ const toObj = JSON.parse(fs.readFileSync('../../config/arm.tmLanguage.json').toS
 const newPatterns = [
     ...toObj.patterns.slice(0, -1),
     {
-        "name": "keyword.operator.hoverEqual",
-        "match": "=="
-    },
-    {
         "name": "constant.language.keywords",
         "match": "\\b(addr|src|num|label|expr)\\b"
     },
