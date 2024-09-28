@@ -2,7 +2,7 @@
   "name": "armextensionhelpers",
   "displayName": "ARM Assembly Helpers",
   "description": "Tools to make coding in ARM Assembly easier and more efficient",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "publisher": "JoshuaBernstein",
   "icon": "./config/file_icon.png",
   "engines": {
