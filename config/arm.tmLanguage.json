@@ -62,23 +62,23 @@
             "patterns": [
                 {
                     "name": "keyword.control.directive.sections.arm",
-                    "match": "\\s*\\.(DATA|data|IWRAM|iwram|BSS|bss|EWRAM|ewram|SBSS|sbss|TEXT|text|RODATA|rodata|GLOBAL|global|EXTERN|extern)"
+                    "match": "\\s*\\.(?i)(DATA|data|IWRAM|iwram|BSS|bss|EWRAM|ewram|SBSS|sbss|TEXT|text|RODATA|rodata|GLOBAL|global|EXTERN|extern)"
                 },
                 {
                     "name": "support.class.directive.type.number",
-                    "match": "\\s*\\.(byte|int|hword|word|quad|dword|octa|single|float|double|(1|2|4|8)byte|dc\\.(b|w|l|a|d|s)|dc|short|value|long|xword)"
+                    "match": "\\s*\\.(?i)(byte|int|hword|word|quad|dword|octa|single|float|double|(1|2|4|8)byte|dc\\.(b|w|l|a|d|s)|dc|short|value|long|xword)"
                 },
                 {
                     "name": "support.class.directive.type.string",
-                    "match": "\\s*\\.(ascii|asciz|string)"
+                    "match": "\\s*\\.(?i)(ascii|asciz|string)"
                 },
                 {
                     "name": "string.regexp.directive.type.align_reserve",
-                    "match": "\\s*\\.(fill|space|skip|rept|endr|align)"
+                    "match": "\\s*\\.(?i)(fill|space|skip|rept|endr|align)"
                 },
                 {
                     "name": "string.regexp.directive.type.align.space",
-                    "match": "\\s*\\.(balign|p2align)(l|w|)"
+                    "match": "\\s*\\.(?i)(balign|p2align)(l|w|)"
                 },
                 {
                     "name": "invalid.illegal.directive",
@@ -94,39 +94,39 @@
             "patterns": [
                 {
                     "name": "support.function.load.arm",
-                    "match": "\\b(LD(U|)RSH|LD(U|)Rsh|LD(U|)RSB|LD(U|)Rsb|LD(U|)RH|LD(U|)Rh|LD(U|)RB|LD(U|)Rb|LD(U|)R|LD(U|)R|SVC|svc|NOP)\\s"
+                    "match": "\\b(?i)(LD(U|)RSH|LD(U|)Rsh|LD(U|)RSB|LD(U|)Rsb|LD(U|)RH|LD(U|)Rh|LD(U|)RB|LD(U|)Rb|LD(U|)R|LD(U|)R|SVC|svc|NOP)\\s"
                 },
                 {
                     "name": "support.function.load.lowercase.arm",
-                    "match": "\\b(ld(u|)rsh|ld(u|)rsh|ld(u|)rsb|ld(u|)rsb|ld(u|)rh|ld(u|)rh|ld(u|)rb|ld(u|)rb|ld(u|)r|ld(u|)r|svc|svc|nop)\\s"
+                    "match": "\\b(?i)(ld(u|)rsh|ld(u|)rsh|ld(u|)rsb|ld(u|)rsb|ld(u|)rh|ld(u|)rh|ld(u|)rb|ld(u|)rb|ld(u|)r|ld(u|)r|svc|svc|nop)\\s"
                 },
                 {
                     "name": "support.function.store.arm",
-                    "match": "\\b(ST(U|)RB|ST(U|)Rb|ST(U|)RH|ST(U|)Rh|ST(U|)R|ST(U|)R)\\s"
+                    "match": "\\b(?i)(ST(U|)RB|ST(U|)Rb|ST(U|)RH|ST(U|)Rh|ST(U|)R|ST(U|)R)\\s"
                 },
                 {
                     "name": "support.function.store.lowercase.arm",
-                    "match": "\\b(st(u|)rb|st(u|)rb|st(u|)rh|st(u|)rh|st(u|)r|st(u|)r)\\s"
+                    "match": "\\b(?i)(st(u|)rb|st(u|)rb|st(u|)rh|st(u|)rh|st(u|)r|st(u|)r)\\s"
                 },
                 {
                     "name": "support.function.move.arm",
-                    "match": "\\b(FMOV|fmov|MOV|mov|ADR|adr|FCVT|fcvt|SCVTF|scvtf|FCVTZS|fcvtzs)\\s"
+                    "match": "\\b(?i)(FMOV|fmov|MOV|mov|ADR|adr|FCVT|fcvt|SCVTF|scvtf|FCVTZS|fcvtzs)\\s"
                 },
                 {
                     "name": "support.function.math.arm",
-                    "match": "\\b(ADDS|adds|ADD|add|SUBS|subs|SUB|sub|MUL|mul|SDIV|sdiv|DIV|div|FADD|fadd)\\s"
+                    "match": "\\b(?i)(ADDS|adds|ADD|add|SUBS|subs|SUB|sub|MUL|mul|SDIV|sdiv|DIV|div|FADD|fadd)\\s"
                 },
                 {
                     "name": "support.function.binary.arm",
-                    "match": "\\b(ANDS|ands|AND|and|EOR|eor|ORR|orr|ASR|asr|LSL|lsl|LSR|lsr)\\s"
+                    "match": "\\b(?i)(ANDS|ands|AND|and|EOR|eor|ORR|orr|ASR|asr|LSL|lsl|LSR|lsr)\\s"
                 },
                 {
                     "name": "support.function.cond_jump.arm",
-                    "match": "(B|b)\\.(EQ|eq|NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs)\\s"
+                    "match": "(?i)(B|b)\\.(EQ|eq|NE|ne|LT|lt|LE|le|GT|gt|GE|ge|LO|lo|LS|ls|HI|hi|HS|hs)\\s"
                 },
                 {
                     "name": "support.function.jump.arm",
-                    "match": "\\b(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)(?!:)\\b"
+                    "match": "\\b(?i)(BR|br|BL|bl|B|b|CBNZ|cbnz|CBZ|cbz|CMP|cmp|RET|ret)(?!:)\\b"
                 }
             ]
         },
